@@ -1,5 +1,13 @@
 import React from 'react';
+import MoviesResult from './MoviesResult';
 
-const App = () => <h1>React Movies App</h1>;
+const App = () => {
+    return (
+        <>
+            <MoviesResult/>
+            <h1>React Movies App</h1>
+        </>
+    );
+};
 
 export default App;
