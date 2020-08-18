@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import MoviesList from './MoviesList';
+import SearchBar from './SearchBar';
 
 const movies = [
     {
@@ -54,43 +55,42 @@ class MoviesResult extends PureComponent {
     }
 
     moviesFilterOnChange = (event) => {
-        console.log('event.target.value', event.target.value);
-
         this.setState({
             inputValue: event.target.value
         });
     }
 
-    getMatchedList = (searchText) => {
-        if (!searchText) return movies;
-        return movies.filter(item => item.name.toLowerCase().includes(searchText.toLowerCase()));
+    dynamicSearch = () => {
+        const { inputValue } = this.state;
+        if (!inputValue) return movies;
+        return movies.filter(movie => movie.title.toLowerCase().includes(inputValue.toLowerCase()));
+    }
+
+    handleSearch = () => {
+        const searchResult = this.dynamicSearch();
+        this.setState({ filteredMovies: searchResult });
     };
 
     render() {
         const { inputValue, filteredMovies} = this.state;
+        // const moviesList = filteredMovies.length ? filteredMovies: movies;
         return (
-            <Wrapper>
-                <MoviesList 
-                    movies = {movies}
-                    inputValue = {inputValue}
-                    filteredMovies = {filteredMovies}
+            <>
+                <SearchBar
+                    inputValue = {inputValue} 
                     moviesFilterOnChange = {this.moviesFilterOnChange}
+                    handleSearch = {this.handleSearch}
                 />
-            </Wrapper>
+                <Wrapper>
+                    <MoviesList
+                        movies = {movies}
+                        filteredMovies = {filteredMovies}
+                    />
+                </Wrapper>
+            </>
         );
     };
 };
-
-// const MoviesResult = () => {
-//     return (
-//         <Wrapper>
-//             <MoviesList 
-//                 movies = {movies}
-//                 inputValue = ''
-//             />
-//         </Wrapper>
-//     );
-// };
 
 const Wrapper = styled.section`
     background: #232323;

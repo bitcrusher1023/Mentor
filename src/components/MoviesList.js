@@ -4,15 +4,15 @@ import styled from 'styled-components';
 import MovieCard from './MovieCard';
 
 const MoviesList = (props) => {
-    const { movies, inputValue, moviesFilterOnChange } = props;
+    const { movies, filteredMovies } = props;
+    const moviesList = filteredMovies.length ? filteredMovies: movies;
     return (
         <>
-            <input type="text" value={inputValue} onChange={moviesFilterOnChange} />
             <MoviesCount>
-                <b>{movies.length}</b> movies found
+                <b>{moviesList.length}</b> movies found
             </MoviesCount>
             <Wrapper>
-                {movies.map((movie) => (
+                {moviesList.map((movie) => (
                     <MovieCard
                         image = {movie.image}
                         title = {movie.title}
@@ -41,13 +41,8 @@ const MoviesCount = styled.p`
 MoviesList.propTypes = {
     // eslint-disable-next-line react/forbid-prop-types
     movies: PropTypes.array.isRequired,
-    inputValue: PropTypes.string,
-    moviesFilterOnChange: PropTypes.func
-};
-
-MoviesList.defaultProps = {
-    inputValue: '',
-    moviesFilterOnChange: () => {}
+    // eslint-disable-next-line react/forbid-prop-types
+    filteredMovies: PropTypes.array.isRequired
 };
 
 export default MoviesList;
