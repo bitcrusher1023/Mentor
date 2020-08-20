@@ -4,8 +4,13 @@ import styled from 'styled-components';
 import MovieCard from './MovieCard';
 
 const MoviesList = (props) => {
-    const { movies, filteredMovies } = props;
-    const moviesList = filteredMovies.length ? filteredMovies: movies;
+    const { movies, sortValue } = props;
+    const moviesList = [...movies];
+
+    moviesList.sort((a,b) => {
+        return a[sortValue] > b[sortValue] ? 1 : -1;
+    });
+    
     return (
         <>
             <MoviesCount>
@@ -41,8 +46,7 @@ const MoviesCount = styled.p`
 MoviesList.propTypes = {
     // eslint-disable-next-line react/forbid-prop-types
     movies: PropTypes.array.isRequired,
-    // eslint-disable-next-line react/forbid-prop-types
-    filteredMovies: PropTypes.array.isRequired
+    sortValue: PropTypes.string.isRequired
 };
 
 export default MoviesList;
