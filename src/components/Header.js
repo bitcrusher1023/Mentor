@@ -1,17 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import SearchBar from './SearchBar';
+import Logo from './Logo';
+import SearchBar from '../containers/SearchBar';
+import AddMovie from './AddMovie';
 
 const Header = (props) => {
-    const { searchValue, searchOnChange, handleSearch } = props;
+    const { searchValue, searchOnChange, handleKeyDown, handleSearch } = props;
     return (
         <Wrapper>
             <WrapBg>
-                <Logo><span>Netflix</span>roulette</Logo>
+                <HeaderTop>
+                    <Logo><span>Netflix</span>roulette</Logo>
+                    <AddMovie/>
+                </HeaderTop>
                 <SearchBar
                     searchValue = {searchValue} 
                     searchOnChange = {searchOnChange}
+                    handleKeyDown = {handleKeyDown}
                     handleSearch = {handleSearch}
                 />
             </WrapBg>
@@ -38,24 +44,22 @@ const WrapBg = styled.div`
     backdrop-filter: blur(4px);
 `;
 
-const Logo = styled.p`
-    color: #f65261;
-    font-size: 20px;
-
-    span {
-        font-weight: bold;
-    }
+const HeaderTop = styled.div`
+    display: flex;
+    justify-content: space-between;
 `;
 
 Header.propTypes = {
     searchValue: PropTypes.string,
     searchOnChange: PropTypes.func,
+    handleKeyDown: PropTypes.func,
     handleSearch: PropTypes.func
 };
 
 Header.defaultProps = {
     searchValue: '',
     searchOnChange: () => {},
+    handleKeyDown: () => {},
     handleSearch: () => {}
 };
 

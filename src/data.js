@@ -3,7 +3,7 @@ const moviesData = [
         id: 1,
         image: 'https://images-na.ssl-images-amazon.com/images/I/71niXI3lxlL._AC_SY679_.jpg',
         title: 'Avengers',
-        description: 'Action & Adventure',
+        description: 'Action',
         date: 2016
     },
     {
@@ -17,21 +17,21 @@ const moviesData = [
         id: 3,
         image: 'https://www.mauvais-genres.com/21970/logan-movie-poster-style-c-adv-29x41-in-2017-james-mangold-hugh-jackman.jpg',
         title: 'Logan',
-        description: 'Action & Adventure',
+        description: 'Action',
         date: 2017
     },
     {
         id: 4,
         image: 'https://images-na.ssl-images-amazon.com/images/I/71rNJQ2g-EL._AC_SL1178_.jpg',
         title: 'MoonLight',
-        description: 'Action & Adventure',
+        description: 'Adventure',
         date: 2018
     },
     {
         id: 5,
         image: 'https://www.joblo.com/assets/images/joblo/posters/2019/01/IO-poster-1.jpg',
         title: 'IO',
-        description: 'Action & Adventure',
+        description: 'Action',
         date: 2019
     },
     {
@@ -44,9 +44,10 @@ const moviesData = [
 ];
 
 const filtersData = [
-    {name:"Cartoon", status: false},
-    {name:"Action", status: false},
-    {name:"Adventure", status: false},
+    {id: 1, name:"Cartoon", status: false},
+    {id: 2, name:"Action", status: false},
+    {id: 3, name: "Comedy", status: false },
+    {id: 4, name:"Adventure", status: false},
 ];
 
 export { moviesData, filtersData };

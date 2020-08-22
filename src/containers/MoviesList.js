@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import MovieCard from './MovieCard';
+import MovieCard from '../components/MovieCard';
 
 const MoviesList = (props) => {
     const { movies, sortValue } = props;

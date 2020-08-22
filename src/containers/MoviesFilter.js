@@ -9,38 +9,34 @@ import styled from 'styled-components';
 const MoviesFilter = (props) => {
     const { onClickAll, all, onClick, filters } = props;
     return (
-        <>
-            <Form>
-                <Ul>
-                    <li onClick={onClickAll}>
-                        <Input
-                            id = "all"
+        <Form>
+            <Ul>
+                <li onClick={onClickAll}>
+                    <Input
+                        id = "all"
+                        type="checkbox"
+                        checked={all}
+                        onChange={() => {}}
+                    />
+                    <Label htmlFor="all">All</Label>
+                </li>
+                {filters.map((filter, i) =>
+                    <li  key={filter.id} data-index={i} onClick={onClick} >
+                        <Input 
+                            id={filter.name}
                             type="checkbox"
-                            checked={all}
+                            checked={filter.status}
                             onChange={() => {}}
                         />
-                        <Label htmlFor="all">All</Label>
-                    </li>
-                    {filters.map((filter, i) =>
-                        // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-                        <li  key={i} data-index={i} onClick={onClick} >
-                            <Input 
-                                id={filter.name}
-                                type="checkbox"
-                                checked={filter.status}
-                                onChange={() => {}}
-                            />
-                            <Label htmlFor={filter.name}>{filter.name}</Label>
-                        </li>)}
-                </Ul>
-            </Form>
-        </>
+                        <Label htmlFor={filter.name}>{filter.name}</Label>
+                    </li>)}
+            </Ul>
+        </Form>
     );
 };
 
 const Form = styled.form`
     display: flex;
-    margin: 30px 0 40px 0;
 `;
 
 const Input = styled.input`
@@ -53,7 +49,6 @@ const Input = styled.input`
 
 const Label = styled.label`
     color: #fff;
-    font-weight: 700;
     padding: 5px 10px 20px;
     border-bottom: 2px solid #f65261;
     border-bottom: 2px solid rgb(246 81 94 / 0);

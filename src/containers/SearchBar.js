@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const SearchBar = (props) => {
-    const { searchValue, searchOnChange, handleSearch } = props;
+    const { searchValue, searchOnChange, handleKeyDown, handleSearch } = props;
     return (
         <>
             <SearchText>find your movies</SearchText>
@@ -11,7 +11,8 @@ const SearchBar = (props) => {
                 <SearchInput type="text"
                     placeholder = 'What do you want to watch?'
                     value = {searchValue}
-                    onChange = {searchOnChange} 
+                    onChange = {searchOnChange}
+                    onKeyDown = {handleKeyDown}
                 />
                 <Button type="button" onClick = {handleSearch}> Search </Button>
             </Wrapper>
@@ -59,12 +60,14 @@ const Button = styled.button`
 SearchBar.propTypes = {
     searchValue: PropTypes.string,
     searchOnChange: PropTypes.func,
+    handleKeyDown: PropTypes.func,
     handleSearch: PropTypes.func
 };
 
 SearchBar.defaultProps = {
     searchValue: '',
     searchOnChange: () => {},
+    handleKeyDown: () => {},
     handleSearch: () => {}
 };
 

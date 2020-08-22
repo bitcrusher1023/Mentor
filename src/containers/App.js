@@ -1,8 +1,10 @@
+/* eslint-disable no-param-reassign */
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
-import { moviesData, filtersData } from './data';
+import { moviesData, filtersData } from '../data';
+import Header from '../components/Header';
 import MoviesResult from './MoviesResult';
-import Header from './Header';
+import Footer from '../components/Footer';
 import ErrorBoundary from './ErrorBounding';
 
 class App extends PureComponent {
@@ -12,7 +14,6 @@ class App extends PureComponent {
         sortValue: 'date',
         filters: filtersData,
         all: true,
-        filteredMovies: [],
         movies: moviesData
     }
 
@@ -24,14 +25,24 @@ class App extends PureComponent {
 
     dynamicSearch = () => {
         const { movies, searchValue } = this.state;
-        if (!searchValue) return movies;
-        return movies.filter(movie => movie.title.toLowerCase().includes(searchValue.toLowerCase()));
+
+        const searchMovies = searchValue
+            ? movies.filter(movie => movie.title.toLowerCase().includes(searchValue.toLowerCase()))
+            : moviesData;
+
+        return searchMovies;
     }
 
     handleSearch = () => {
         const searchResult = this.dynamicSearch();
         this.setState({ movies: searchResult });
     };
+
+    handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            this.handleSearch();
+        }
+    }
 
     sortingOnChange = (event) => {
         this.setState({
@@ -41,10 +52,11 @@ class App extends PureComponent {
 
     setAll = () => {
         const { filters } = this.state;
+
         filters.forEach(filter => {
             filter.status = false;
         });
-        
+
         this.setState({
             all: true,
             filters,
@@ -67,7 +79,7 @@ class App extends PureComponent {
         this.updateFilters();
     }
 
-    updateFilters(){
+    updateFilters() {
         const { filters } = this.state;
         const allFiltersTrue = filters.every(filter => filter.status === true);
         const allFiltersFalse = filters.every(filter => filter.status === false);
@@ -83,10 +95,12 @@ class App extends PureComponent {
     }
 
     updateMovies() {
-        const { filters } = this.state;
+        const { filters, searchValue, movies } = this.state;
         const newMovies = [];
+
+        const oldMovies = searchValue ? movies : moviesData;
         
-        moviesData.forEach((movie) => { 
+        oldMovies.forEach((movie) => { 
             filters.forEach((filter)=> {
                 if((movie.description === filter.name) && (filter.status === true)) {
                     newMovies.push(movie);
@@ -103,25 +117,30 @@ class App extends PureComponent {
         const {filters, searchValue, movies, all, sortValue} = this.state;
 
         return (
-            <Wrapper>
-                <Header
-                    searchValue = {searchValue} 
-                    searchOnChange = {this.searchOnChange}
-                    handleSearch = {this.handleSearch}
-                />
-                <ErrorBoundary>
-                    <MoviesResult
-                        filters = {filters}
-                        all = {all}
-                        onClickAll={this.setAll}
-                        onClick={this.setFilter}
-                        movies = {movies}
-                        sortValue = {sortValue}
-                        sortingOnChange={this.sortingOnChange}
-                        // filteredMovies = {filteredMovies}
-                    />
-                </ErrorBoundary>
-            </Wrapper>
+            <>
+                <Wrapper>
+                    <ErrorBoundary>
+                        <Header
+                            searchValue = {searchValue} 
+                            searchOnChange = {this.searchOnChange}
+                            handleKeyDown = {this.handleKeyDown}
+                            handleSearch = {this.handleSearch}
+                        />
+                    </ErrorBoundary>
+                    <ErrorBoundary>
+                        <MoviesResult
+                            filters = {filters}
+                            all = {all}
+                            onClickAll={this.setAll}
+                            onClick={this.setFilter}
+                            movies = {movies}
+                            sortValue = {sortValue}
+                            sortingOnChange={this.sortingOnChange}
+                        />
+                    </ErrorBoundary>
+                </Wrapper>
+                <Footer/>
+            </>
         );
     }
 }
