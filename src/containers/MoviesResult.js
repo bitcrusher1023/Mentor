@@ -43,7 +43,7 @@ const Wrapper = styled.section`
 
 const ActionBar = styled.div`
     display: flex;
-    align-item: center;
+    align-items: center;
     justify-content: space-between;
     margin: 10px 0;
     padding: 3px 0;

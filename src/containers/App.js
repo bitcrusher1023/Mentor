@@ -14,7 +14,8 @@ class App extends PureComponent {
         sortValue: 'date',
         filters: filtersData,
         all: true,
-        movies: moviesData
+        movies: moviesData,
+        defaultMoviesData: moviesData
     }
 
     searchOnChange = (event) => {
@@ -23,20 +24,30 @@ class App extends PureComponent {
         });
     }
 
-    dynamicSearch = () => {
-        const { movies, searchValue } = this.state;
+    // dynamicSearch = () => {
+    //     const { movies, searchValue } = this.state;
 
-        const searchMovies = searchValue
-            ? movies.filter(movie => movie.title.toLowerCase().includes(searchValue.toLowerCase()))
-            : moviesData;
+    //     const searchMovies = searchValue
+    //         ? movies.filter(movie => movie.title.toLowerCase().includes(searchValue.toLowerCase()))
+    //         : moviesData;
 
-        return searchMovies;
-    }
+    //     return searchMovies;
+    // }
+
+    // handleSearch = () => {
+    //     const searchResult = this.dynamicSearch();
+    //     this.setState({ movies: searchResult });
+    // };
 
     handleSearch = () => {
-        const searchResult = this.dynamicSearch();
-        this.setState({ movies: searchResult });
-    };
+        const { movies, searchValue, defaultMoviesData } = this.state;
+
+        this.setState({
+            movies: searchValue
+                ? movies.filter(({ title }) => (title.toLowerCase().includes(searchValue.toLowerCase()))) // It's possible to create a helper to make more readable
+                : defaultMoviesData, // If you use api you will make api call or save default data into separate field
+        });
+    }
 
     handleKeyDown = (event) => {
         if (event.key === 'Enter') {
@@ -50,17 +61,27 @@ class App extends PureComponent {
         });
     };
 
-    setAll = () => {
-        const { filters } = this.state;
+    // setAll = () => {
+    //     const { filters } = this.state;
 
-        filters.forEach(filter => {
-            filter.status = false;
-        });
+    //     filters.forEach(filter => {
+    //         filter.status = false;
+    //     });
+
+    //     this.setState({
+    //         all: true,
+    //         filters,
+    //         movies: moviesData
+    //     });
+    // }
+    
+    setAll = () => {
+        const { filters, defaultMoviesData } = this.state;
 
         this.setState({
             all: true,
-            filters,
-            movies: moviesData
+            filters: filters.map(filter => ({ ...filter, status: false })),
+            movies: defaultMoviesData
         });
     }
 

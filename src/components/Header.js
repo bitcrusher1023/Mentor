@@ -5,8 +5,7 @@ import Logo from './Logo';
 import SearchBar from '../containers/SearchBar';
 import AddMovie from './AddMovie';
 
-const Header = (props) => {
-    const { searchValue, searchOnChange, handleKeyDown, handleSearch } = props;
+const Header = ({ searchValue, searchOnChange, handleKeyDown, handleSearch }) => {
     return (
         <Wrapper>
             <WrapBg>
