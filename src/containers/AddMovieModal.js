@@ -10,8 +10,11 @@ const AddMovieModal = ({show, handleShow, initialData, onSubmit}) => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        console.log(movieData);
-        onSubmit(movieData);
+        const newMoveData = {
+            ...movieData,
+            id: new Date().getTime()
+        };
+        onSubmit(newMoveData);
     };
 
     const handleChange = fieldName => fieldValue => {
@@ -150,6 +153,7 @@ const Form = styled.form`
 const BtnWrap = styled.div`
     display: flex;
     justify-content: flex-end;
+    margin-top: 80px;
 `;
 
 const ResetBtn = styled.button`
@@ -177,47 +181,16 @@ const SubmitBtn = styled.input`
     text-transform: uppercase;
 `;
 
-// const SearchText = styled.p`
-//     width: 90%;
-//     text-transform: uppercase;
-//     color: #fff;
-//     font-size: 40px;
-//     margin: 50px auto 40px;
-// `;
+AddMovieModal.propTypes = {
+    show: PropTypes.bool,
+    handleShow: PropTypes.func,
+    onSubmit: PropTypes.func
+};
 
-// const SearchInput = styled.input`
-//     width: 74%;
-//     height: 40px;
-//     border: none;
-//     opacity: 0.8;
-//     color: #555;
-//     font-size: 18px;
-//     background: #232323;
-//     padding: 10px 20px;
-// `;
-
-// const Button = styled.button`
-//     width: 20%;
-//     height: 60px;
-//     padding: 10px 20px;
-//     background: #f65261;
-//     font-size: 20px;
-//     color: #fff;
-//     text-transform: uppercase;
-// `;
-
-// SearchBar.propTypes = {
-//     searchValue: PropTypes.string,
-//     searchOnChange: PropTypes.func,
-//     handleKeyDown: PropTypes.func,
-//     handleSearch: PropTypes.func
-// };
-
-// SearchBar.defaultProps = {
-//     searchValue: '',
-//     searchOnChange: () => {},
-//     handleKeyDown: () => {},
-//     handleSearch: () => {}
-// };
+AddMovieModal.defaultProps = {
+    show: false,
+    handleShow: () => {},
+    onSubmit: () => {}
+};
 
 export default AddMovieModal;

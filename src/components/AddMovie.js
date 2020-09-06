@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const AddMovie = ({handleShow}) => {
     return (
@@ -19,5 +20,13 @@ const Button = styled.button`
     text-transform: uppercase;
     cursor: pointer;
 `;
+
+AddMovie.propTypes = {
+    handleShow: PropTypes.func,
+};
+
+AddMovie.defaultProps = {
+    handleShow: () => {}
+};
 
 export default AddMovie;

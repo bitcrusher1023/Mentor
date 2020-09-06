@@ -87,12 +87,13 @@ const ReleaseDate = styled.p`
 MovieCard.propTypes = {
     image: PropTypes.string,
     title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    date: PropTypes.number.isRequired
+    genre: PropTypes.string,
+    date: PropTypes.string.isRequired
 };
 
 MovieCard.defaultProps = {
-    image: 'https://cdn3.vectorstock.com/i/1000x1000/50/07/http-404-not-found-error-message-hypertext-vector-20025007.jpg'
+    image: 'https://cdn3.vectorstock.com/i/1000x1000/50/07/http-404-not-found-error-message-hypertext-vector-20025007.jpg',
+    genre: ''
 };
 
 export default MovieCard;

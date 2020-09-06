@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const InputField = ({ label, type, value, placeholder, onChange }) => (
     <Label>
@@ -32,5 +33,21 @@ const Input = styled.input`
     padding: 10px 20px;
     margin: 20px 0;
 `;
+
+InputField.propTypes = {
+    label: PropTypes.string,
+    type: PropTypes.string,
+    value: PropTypes.string,
+    placeholder: PropTypes.string,
+    onChange: PropTypes.func
+};
+
+InputField.defaultProps = {
+    label: '',
+    type: 'text',
+    value: '',
+    placeholder: '',
+    onChange: () => {},
+};
 
 export default InputField;

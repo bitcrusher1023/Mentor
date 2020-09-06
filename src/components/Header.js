@@ -73,14 +73,16 @@ Header.propTypes = {
     searchValue: PropTypes.string,
     searchOnChange: PropTypes.func,
     handleKeyDown: PropTypes.func,
-    handleSearch: PropTypes.func
+    handleSearch: PropTypes.func,
+    addMovie: PropTypes.func
 };
 
 Header.defaultProps = {
     searchValue: '',
     searchOnChange: () => {},
     handleKeyDown: () => {},
-    handleSearch: () => {}
+    handleSearch: () => {},
+    addMovie: () => {}
 };
 
 export default Header;
