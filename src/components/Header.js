@@ -1,17 +1,38 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Logo from './Logo';
 import SearchBar from '../containers/SearchBar';
 import AddMovie from './AddMovie';
+import AddMovieModal from '../containers/AddMovieModal';
 
-const Header = ({ searchValue, searchOnChange, handleKeyDown, handleSearch }) => {
+const Header = ({ searchValue, searchOnChange, handleKeyDown, handleSearch, addMovie }) => {
+    const [show, setShow] = useState(false);
+
+    const handleShow = () => {
+        setShow(!show);
+    };
+
+    const [initialData, setForm] = useState({
+        title: '',
+        date: '',
+        url: '',
+        overview: '',
+        runtime: ''
+    });
+
+    const onSubmit = (movieData) => {
+        addMovie(movieData);
+        handleShow();
+    };
+
     return (
         <Wrapper>
             <WrapBg>
                 <HeaderTop>
                     <Logo><span>Netflix</span>roulette</Logo>
-                    <AddMovie/>
+                    <AddMovie {...{handleShow}}/>
+                    { show && <AddMovieModal {...{show, handleShow, initialData, onSubmit}}/> }
                 </HeaderTop>
                 <SearchBar
                     searchValue = {searchValue} 

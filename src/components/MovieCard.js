@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const MovieCard = (props) => {
-    const { title, description, date, image } = props;
+    const { title, genre, date, image } = props;
 
     return (
         <Wrapper>
@@ -13,7 +13,7 @@ const MovieCard = (props) => {
             <MovieInfo>
                 <MovieInfoCol>
                     <Title>{title}</Title>
-                    <Genre>{description}</Genre>
+                    <Genre>{genre}</Genre>
                 </MovieInfoCol>
                 <ReleaseDate>{date}</ReleaseDate>
             </MovieInfo>
@@ -87,7 +87,7 @@ const ReleaseDate = styled.p`
 MovieCard.propTypes = {
     image: PropTypes.string,
     title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
     date: PropTypes.number.isRequired
 };
 

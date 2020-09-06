@@ -21,7 +21,7 @@ const MoviesList = (props) => {
                     <MovieCard
                         image = {movie.image}
                         title = {movie.title}
-                        description = {movie.description}
+                        genre = {movie.genre}
                         date = {movie.date}
                         key = {movie.id}
                     />

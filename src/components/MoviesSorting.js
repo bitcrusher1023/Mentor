@@ -12,7 +12,7 @@ const  MoviesSorting = props => {
             <Select id="seriesInput" onChange={sortingOnChange}>
                 <option value="date">release date</option>
                 <option value="title">movie name</option>
-                <option value="description">genre</option>
+                <option value="genre">genre</option>
             </Select>
         </Form>
     );

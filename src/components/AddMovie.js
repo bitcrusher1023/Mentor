@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const AddMovie = () => {
+const AddMovie = ({handleShow}) => {
     return (
-        <Button>+ Add Movie</Button>
+        <Button onClick={handleShow}>+ Add Movie</Button>
     );
 };
 
