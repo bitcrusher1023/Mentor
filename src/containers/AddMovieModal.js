@@ -1,7 +1,10 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import CloseButton from '../components/CloseButton';
 import InputField from '../components/InputField';
 
 const AddMovieModal = ({show, handleShow, initialData, onSubmit}) => {
@@ -36,7 +39,9 @@ const AddMovieModal = ({show, handleShow, initialData, onSubmit}) => {
             <Wrapper show={show}>
                 <ModalContent>
                     <Title>Add movie</Title>
-                    <CloseBtn onClick={handleShow}/>
+                    <div onClick={handleShow}>
+                        <CloseButton/>
+                    </div>
                     <Form onSubmit={handleSubmit}>
                         <InputField
                             label='Title'
@@ -117,32 +122,6 @@ const Title = styled.p`
     font-size: 2.4rem;
     text-transform: uppercase;
     margin-top: 0;
-`;
-
-const CloseBtn = styled.div`
-    width: 30px;
-    height: 30px;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-
-    &::after {
-        content: '';
-        height: 30px;
-        border-left: 2px solid #fff;
-        position: absolute;
-        transform: rotate(45deg);
-        left: 14px;
-    }
-
-    &::before {
-        content: '';
-        height: 30px;
-        border-left: 2px solid #fff;
-        position: absolute;
-        transform: rotate(-45deg);
-        left: 14px;
-    }
 `;
 
 const Form = styled.form`

@@ -1,14 +1,24 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import MovieActionButton from './MovieActionButton';
+import MovieAction from '../containers/MovieAction';
 
 const MovieCard = (props) => {
     const { title, genre, date, image } = props;
 
+    const [isHovered, setHovered] = useState(false);
+
+    const handleHover = () => {
+        setHovered(!isHovered);
+    };
+
     return (
-        <Wrapper>
+        <Wrapper 
+            onMouseEnter={handleHover}
+            onMouseLeave={handleHover}>
             <Poster image={image}>
-                <Icon/>
+                <MovieAction {...{isHovered}}/>
             </Poster>
             <MovieInfo>
                 <MovieInfoCol>
@@ -26,20 +36,6 @@ const Wrapper = styled.section`
     margin: 0 0 20px 0;
 `;
 
-const Icon = styled.div`
-    display: flex;
-    width: 30px;
-    height: 30px;
-    padding: 10px;
-    margin: 30px 20px;
-    border-radius: 50%;
-    background-image: radial-gradient(circle,white 4px,transparent 5px);
-    background-size: 100% 33.33%;
-    background-color: #232323;
-    cursor: pointer;
-    opacity: 0;
-`;
-
 const Poster = styled.div`
     display: flex;
     justify-content: flex-end;
@@ -48,10 +44,6 @@ const Poster = styled.div`
     background-image: url(${props => props.image});
     background-repeat: no-repeat;
     background-size: cover;
-
-    &:hover ${Icon} {
-        opacity: 1;
-    }
 `;
 
 const MovieInfo = styled.div`
