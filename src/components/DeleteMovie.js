@@ -4,7 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 import CloseButton from './CloseButton';
 
-const DeleteMovie = ({handleShowDelete}) => {
+const DeleteMovie = ({handleShowDelete, onDelete}) => {
     return (
         <div>
             <ModalContent>
@@ -14,7 +14,7 @@ const DeleteMovie = ({handleShowDelete}) => {
                 </div>
                 <Text>Are you sure you want to delete this movie?</Text>
                 <BtnWrap>
-                    <ConfirmBtn>
+                    <ConfirmBtn onClick={onDelete}>
                         Confirm
                     </ConfirmBtn>
                 </BtnWrap>

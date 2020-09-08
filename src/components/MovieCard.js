@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import MovieActionButton from './MovieActionButton';
 import MovieAction from '../containers/MovieAction';
 
 const MovieCard = (props) => {
-    const { title, genre, date, image } = props;
+    const { movieId, title, genre, date, image, deleteMovie } = props;
 
     const [isHovered, setHovered] = useState(false);
 
@@ -18,7 +17,11 @@ const MovieCard = (props) => {
             onMouseEnter={handleHover}
             onMouseLeave={handleHover}>
             <Poster image={image}>
-                <MovieAction {...{isHovered}}/>
+                <MovieAction 
+                    {...{isHovered}}
+                    movieId = {movieId}
+                    onDeleteMovie = {deleteMovie}
+                />
             </Poster>
             <MovieInfo>
                 <MovieInfoCol>

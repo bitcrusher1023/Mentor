@@ -26,6 +26,15 @@ class App extends PureComponent {
         });
     }
 
+    deleteMovie = (movieId) => {
+        const { movies } = this.state;
+        const newMovies = movies.filter(movie => movie.id !== movieId);
+
+        this.setState({
+            movies: newMovies
+        });
+    }
+
     searchOnChange = (event) => {
         this.setState({
             searchValue: event.target.value
@@ -137,6 +146,7 @@ class App extends PureComponent {
                             movies = {movies}
                             sortValue = {sortValue}
                             sortingOnChange={this.sortingOnChange}
+                            deleteMovie = {this.deleteMovie}
                         />
                     </ErrorBoundary>
                 </Wrapper>

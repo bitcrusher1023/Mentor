@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import MovieCard from '../components/MovieCard';
 
 const MoviesList = (props) => {
-    const { movies, sortValue } = props;
+    const { movies, sortValue, deleteMovie } = props;
     const moviesList = [...movies];
 
     moviesList.sort((a,b) => {
@@ -19,11 +19,13 @@ const MoviesList = (props) => {
             <Wrapper>
                 {moviesList.map((movie) => (
                     <MovieCard
+                        movieId = {movie.id}
                         image = {movie.image}
                         title = {movie.title}
                         genre = {movie.genre}
                         date = {movie.date}
                         key = {movie.id}
+                        deleteMovie = {deleteMovie}
                     />
                 ))}
             </Wrapper>
