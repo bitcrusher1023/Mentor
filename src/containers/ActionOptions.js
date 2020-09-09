@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
@@ -32,8 +32,14 @@ const OptionItem = styled.p`
     cursor: pointer;
 `;
 
-// MovieAction.propTypes = {
-//     isHovered: PropTypes.bool.isRequired,
-// };
+ActionOptions.propTypes = {
+    handleDeleteMovie: PropTypes.func,
+    handleEditMovie: PropTypes.func
+};
+
+ActionOptions.defaultProps = {
+    handleDeleteMovie: () => {},
+    handleEditMovie: () => {}
+};
 
 export default ActionOptions;

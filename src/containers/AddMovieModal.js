@@ -1,3 +1,5 @@
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable react/require-default-props */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/label-has-associated-control */
@@ -7,17 +9,13 @@ import styled from 'styled-components';
 import CloseButton from '../components/CloseButton';
 import InputField from '../components/InputField';
 
-const AddMovieModal = ({show, handleShow, initialData, onSubmit}) => {
+const AddMovieModal = ({handleShow, initialData, onSubmit}) => {
 
     const [movieData, setMovieData] = useState(initialData);
 
     const handleSubmit = e => {
         e.preventDefault();
-        const newMoveData = {
-            ...movieData,
-            id: new Date().getTime()
-        };
-        onSubmit(newMoveData);
+        onSubmit(movieData);
     };
 
     const handleChange = fieldName => fieldValue => {
@@ -27,7 +25,8 @@ const AddMovieModal = ({show, handleShow, initialData, onSubmit}) => {
         });
     };
 
-    const handleReset = () => {
+    const handleReset = (e) => {
+        e.preventDefault();
         setMovieData({
             ...movieData,
             ...initialData
@@ -35,58 +34,56 @@ const AddMovieModal = ({show, handleShow, initialData, onSubmit}) => {
     };
 
     return (
-        <>
-            <Wrapper show={show}>
-                <ModalContent>
-                    <Title>Add movie</Title>
-                    <div onClick={handleShow}>
-                        <CloseButton/>
-                    </div>
-                    <Form onSubmit={handleSubmit}>
-                        <InputField
-                            label='Title'
-                            value={movieData.title}
-                            placeholder='Title here'
-                            onChange={handleChange('title')}
-                        />
-                        <InputField
-                            label='Release date'
-                            type='date'
-                            value={movieData.date}
-                            placeholder='Select Date'
-                            onChange={handleChange('date')}
-                        />
-                        <InputField
-                            label='Movie url'
-                            type='url'
-                            value={movieData.url}
-                            placeholder='Movie url here'
-                            onChange={handleChange('url')}
-                        />
-                        <InputField
-                            label='Overview'
-                            value={movieData.overview}
-                            placeholder='Overview here'
-                            onChange={handleChange('overview')}
-                        />
-                        <InputField
-                            label='Runtime'
-                            type='number'
-                            value={movieData.runtime}
-                            placeholder='Runtime here'
-                            onChange={handleChange('runtime')}
-                        />
-                        <BtnWrap>
-                            <ResetBtn onClick={handleReset}>
-                                Reset
-                            </ResetBtn>
-                            <SubmitBtn type="submit" value="Submit" />
-                        </BtnWrap>
-                    </Form>
-                </ModalContent>
-                <Overlay />
-            </Wrapper>
-        </>
+        <Wrapper>
+            <ModalContent>
+                <Title>Add movie</Title>
+                <div onClick={handleShow}>
+                    <CloseButton/>
+                </div>
+                <Form onSubmit={handleSubmit}>
+                    <InputField
+                        label='Title'
+                        value={movieData.title}
+                        placeholder='Title here'
+                        onChange={handleChange('title')}
+                    />
+                    <InputField
+                        label='Release date'
+                        type='date'
+                        value={movieData.date}
+                        placeholder='Select Date'
+                        onChange={handleChange('date')}
+                    />
+                    <InputField
+                        label='Movie url'
+                        type='url'
+                        value={movieData.url}
+                        placeholder='Movie url here'
+                        onChange={handleChange('url')}
+                    />
+                    <InputField
+                        label='Overview'
+                        value={movieData.overview}
+                        placeholder='Overview here'
+                        onChange={handleChange('overview')}
+                    />
+                    <InputField
+                        label='Runtime'
+                        type='number'
+                        value={movieData.runtime}
+                        placeholder='Runtime here'
+                        onChange={handleChange('runtime')}
+                    />
+                    <BtnWrap>
+                        <ResetBtn type="reset" onClick={handleReset}>
+                            Reset
+                        </ResetBtn>
+                        <SubmitBtn type="submit" value="Submit" />
+                    </BtnWrap>
+                </Form>
+            </ModalContent>
+            <Overlay />
+        </Wrapper>
     );
 };
 
@@ -161,13 +158,12 @@ const SubmitBtn = styled.input`
 `;
 
 AddMovieModal.propTypes = {
-    show: PropTypes.bool,
     handleShow: PropTypes.func,
-    onSubmit: PropTypes.func
+    onSubmit: PropTypes.func,
+    initialData: PropTypes.object
 };
 
 AddMovieModal.defaultProps = {
-    show: false,
     handleShow: () => {},
     onSubmit: () => {}
 };

@@ -35,6 +35,17 @@ class App extends PureComponent {
         });
     }
 
+    editMovie = (movieData) => {
+        const { movies } = this.state;
+        const index = movies.findIndex(movie => movie.id === movieData.id);
+        const newMovies = [...movies];
+        newMovies.splice(index, 1, movieData);
+
+        this.setState({
+            movies: newMovies
+        });
+    }
+
     searchOnChange = (event) => {
         this.setState({
             searchValue: event.target.value
@@ -147,6 +158,7 @@ class App extends PureComponent {
                             sortValue = {sortValue}
                             sortingOnChange={this.sortingOnChange}
                             deleteMovie = {this.deleteMovie}
+                            editMovie = {this.editMovie}
                         />
                     </ErrorBoundary>
                 </Wrapper>

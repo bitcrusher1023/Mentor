@@ -1,10 +1,11 @@
+/* eslint-disable react/forbid-prop-types */
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import MovieAction from '../containers/MovieAction';
 
 const MovieCard = (props) => {
-    const { movieId, title, genre, date, image, deleteMovie } = props;
+    const { movie, title, genre, date, image, deleteMovie, editMovie } = props;
 
     const [isHovered, setHovered] = useState(false);
 
@@ -19,8 +20,9 @@ const MovieCard = (props) => {
             <Poster image={image}>
                 <MovieAction 
                     {...{isHovered}}
-                    movieId = {movieId}
+                    movie = {movie}
                     onDeleteMovie = {deleteMovie}
+                    onEditMovie = {editMovie}
                 />
             </Poster>
             <MovieInfo>
@@ -83,7 +85,10 @@ MovieCard.propTypes = {
     image: PropTypes.string,
     title: PropTypes.string.isRequired,
     genre: PropTypes.string,
-    date: PropTypes.string.isRequired
+    date: PropTypes.string.isRequired,
+    deleteMovie: PropTypes.func.isRequired,
+    editMovie: PropTypes.func.isRequired,
+    movie: PropTypes.object.isRequired
 };
 
 MovieCard.defaultProps = {

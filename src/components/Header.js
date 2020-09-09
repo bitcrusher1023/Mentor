@@ -7,13 +7,13 @@ import AddMovie from './AddMovie';
 import AddMovieModal from '../containers/AddMovieModal';
 
 const Header = ({ searchValue, searchOnChange, handleKeyDown, handleSearch, addMovie }) => {
-    const [show, setShow] = useState(false);
+    const [showModal, setShow] = useState(false);
 
     const handleShow = () => {
-        setShow(!show);
+        setShow(!showModal);
     };
 
-    const [initialData, setForm] = useState({
+    const [initialData] = useState({
         title: '',
         date: '',
         url: '',
@@ -22,7 +22,11 @@ const Header = ({ searchValue, searchOnChange, handleKeyDown, handleSearch, addM
     });
 
     const onSubmit = (movieData) => {
-        addMovie(movieData);
+        const newMoveData = {
+            ...movieData,
+            id: new Date().getTime()
+        };
+        addMovie(newMoveData);
         handleShow();
     };
 
@@ -32,7 +36,7 @@ const Header = ({ searchValue, searchOnChange, handleKeyDown, handleSearch, addM
                 <HeaderTop>
                     <Logo><span>Netflix</span>roulette</Logo>
                     <AddMovie {...{handleShow}}/>
-                    { show && <AddMovieModal {...{show, handleShow, initialData, onSubmit}}/> }
+                    { showModal && <AddMovieModal {...{showModal, handleShow, initialData, onSubmit}}/> }
                 </HeaderTop>
                 <SearchBar
                     searchValue = {searchValue} 

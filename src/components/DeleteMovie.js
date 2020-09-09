@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import CloseButton from './CloseButton';
 
 const DeleteMovie = ({handleShowDelete, onDelete}) => {
@@ -79,16 +80,9 @@ const ConfirmBtn = styled.button`
     text-transform: uppercase;
 `;
 
-// DeleteMovie.propTypes = {
-//     show: PropTypes.bool,
-//     handleShow: PropTypes.func,
-//     onSubmit: PropTypes.func
-// };
-
-// DeleteMovie.defaultProps = {
-//     show: false,
-//     handleShow: () => {},
-//     onSubmit: () => {}
-// };
+DeleteMovie.propTypes = {
+    handleShowDelete: PropTypes.func.isRequired,
+    onDelete: PropTypes.func.isRequired
+};
 
 export default DeleteMovie;

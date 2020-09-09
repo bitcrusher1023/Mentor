@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const MovieActionButton = ({handleShowOptions}) => {
     return (
@@ -19,5 +20,9 @@ const ActionIcon = styled.div`
     background-color: #232323;
     cursor: pointer;
 `;
+
+MovieActionButton.propTypes = {
+    handleShowOptions: PropTypes.func.isRequired
+};
 
 export default MovieActionButton;
