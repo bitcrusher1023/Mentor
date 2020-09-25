@@ -1,17 +1,42 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Logo from './Logo';
 import SearchBar from '../containers/SearchBar';
 import AddMovie from './AddMovie';
+import AddMovieModal from '../containers/AddMovieModal';
 
-const Header = ({ searchValue, searchOnChange, handleKeyDown, handleSearch }) => {
+const Header = ({ searchValue, searchOnChange, handleKeyDown, handleSearch, addMovie }) => {
+    const [showModal, setShow] = useState(false);
+
+    const handleShow = () => {
+        setShow(!showModal);
+    };
+
+    const [initialData] = useState({
+        title: '',
+        date: '',
+        url: '',
+        overview: '',
+        runtime: ''
+    });
+
+    const onSubmit = (movieData) => {
+        const newMoveData = {
+            ...movieData,
+            id: new Date().getTime()
+        };
+        addMovie(newMoveData);
+        handleShow();
+    };
+
     return (
         <Wrapper>
             <WrapBg>
                 <HeaderTop>
                     <Logo><span>Netflix</span>roulette</Logo>
-                    <AddMovie/>
+                    <AddMovie {...{handleShow}}/>
+                    { showModal && <AddMovieModal {...{showModal, handleShow, initialData, onSubmit}}/> }
                 </HeaderTop>
                 <SearchBar
                     searchValue = {searchValue} 
@@ -52,14 +77,16 @@ Header.propTypes = {
     searchValue: PropTypes.string,
     searchOnChange: PropTypes.func,
     handleKeyDown: PropTypes.func,
-    handleSearch: PropTypes.func
+    handleSearch: PropTypes.func,
+    addMovie: PropTypes.func
 };
 
 Header.defaultProps = {
     searchValue: '',
     searchOnChange: () => {},
     handleKeyDown: () => {},
-    handleSearch: () => {}
+    handleSearch: () => {},
+    addMovie: () => {}
 };
 
 export default Header;

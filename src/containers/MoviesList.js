@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import MovieCard from '../components/MovieCard';
 
 const MoviesList = (props) => {
-    const { movies, sortValue } = props;
+    const { movies, sortValue, deleteMovie, editMovie } = props;
     const moviesList = [...movies];
 
     moviesList.sort((a,b) => {
@@ -19,11 +19,14 @@ const MoviesList = (props) => {
             <Wrapper>
                 {moviesList.map((movie) => (
                     <MovieCard
+                        movie = {movie}
                         image = {movie.image}
                         title = {movie.title}
-                        description = {movie.description}
+                        genre = {movie.genre}
                         date = {movie.date}
                         key = {movie.id}
+                        deleteMovie = {deleteMovie}
+                        editMovie = {editMovie}
                     />
                 ))}
             </Wrapper>
@@ -46,7 +49,14 @@ const MoviesCount = styled.p`
 MoviesList.propTypes = {
     // eslint-disable-next-line react/forbid-prop-types
     movies: PropTypes.array.isRequired,
-    sortValue: PropTypes.string.isRequired
+    sortValue: PropTypes.string.isRequired,
+    deleteMovie: PropTypes.func,
+    editMovie: PropTypes.func
+};
+
+MoviesList.defaultProps = {
+    deleteMovie: () => {},
+    editMovie: () => {}
 };
 
 export default MoviesList;

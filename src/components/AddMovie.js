@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
-const AddMovie = () => {
+const AddMovie = ({handleShow}) => {
     return (
-        <Button>+ Add Movie</Button>
+        <Button onClick={handleShow}>+ Add Movie</Button>
     );
 };
 
@@ -19,5 +20,13 @@ const Button = styled.button`
     text-transform: uppercase;
     cursor: pointer;
 `;
+
+AddMovie.propTypes = {
+    handleShow: PropTypes.func,
+};
+
+AddMovie.defaultProps = {
+    handleShow: () => {}
+};
 
 export default AddMovie;

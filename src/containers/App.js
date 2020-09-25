@@ -18,34 +18,47 @@ class App extends PureComponent {
         defaultMoviesData: moviesData
     }
 
+    addMovie = (movieData) => {
+        const { movies } = this.state;
+
+        this.setState({
+            movies: [...movies, movieData]
+        });
+    }
+
+    deleteMovie = (movieId) => {
+        const { movies } = this.state;
+        const newMovies = movies.filter(movie => movie.id !== movieId);
+
+        this.setState({
+            movies: newMovies
+        });
+    }
+
+    editMovie = (movieData) => {
+        const { movies } = this.state;
+        const index = movies.findIndex(movie => movie.id === movieData.id);
+        const newMovies = [...movies];
+        newMovies.splice(index, 1, movieData);
+
+        this.setState({
+            movies: newMovies
+        });
+    }
+
     searchOnChange = (event) => {
         this.setState({
             searchValue: event.target.value
         });
     }
 
-    // dynamicSearch = () => {
-    //     const { movies, searchValue } = this.state;
-
-    //     const searchMovies = searchValue
-    //         ? movies.filter(movie => movie.title.toLowerCase().includes(searchValue.toLowerCase()))
-    //         : moviesData;
-
-    //     return searchMovies;
-    // }
-
-    // handleSearch = () => {
-    //     const searchResult = this.dynamicSearch();
-    //     this.setState({ movies: searchResult });
-    // };
-
     handleSearch = () => {
         const { movies, searchValue, defaultMoviesData } = this.state;
 
         this.setState({
             movies: searchValue
-                ? movies.filter(({ title }) => (title.toLowerCase().includes(searchValue.toLowerCase()))) // It's possible to create a helper to make more readable
-                : defaultMoviesData, // If you use api you will make api call or save default data into separate field
+                ? movies.filter(({ title }) => (title.toLowerCase().includes(searchValue.toLowerCase())))
+                : defaultMoviesData,
         });
     }
 
@@ -60,20 +73,6 @@ class App extends PureComponent {
             sortValue: event.target.value,
         });
     };
-
-    // setAll = () => {
-    //     const { filters } = this.state;
-
-    //     filters.forEach(filter => {
-    //         filter.status = false;
-    //     });
-
-    //     this.setState({
-    //         all: true,
-    //         filters,
-    //         movies: moviesData
-    //     });
-    // }
     
     setAll = () => {
         const { filters, defaultMoviesData } = this.state;
@@ -123,7 +122,7 @@ class App extends PureComponent {
         
         oldMovies.forEach((movie) => { 
             filters.forEach((filter)=> {
-                if((movie.description === filter.name) && (filter.status === true)) {
+                if((movie.genre === filter.name) && (filter.status === true)) {
                     newMovies.push(movie);
                 }
             });
@@ -146,6 +145,7 @@ class App extends PureComponent {
                             searchOnChange = {this.searchOnChange}
                             handleKeyDown = {this.handleKeyDown}
                             handleSearch = {this.handleSearch}
+                            addMovie = {this.addMovie}
                         />
                     </ErrorBoundary>
                     <ErrorBoundary>
@@ -157,6 +157,8 @@ class App extends PureComponent {
                             movies = {movies}
                             sortValue = {sortValue}
                             sortingOnChange={this.sortingOnChange}
+                            deleteMovie = {this.deleteMovie}
+                            editMovie = {this.editMovie}
                         />
                     </ErrorBoundary>
                 </Wrapper>

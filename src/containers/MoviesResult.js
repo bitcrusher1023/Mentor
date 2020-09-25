@@ -8,7 +8,7 @@ import MoviesList from './MoviesList';
 import NoFound from '../components/NoFound';
 
 const MoviesResult = (props) => {
-    const { filters, all, onClickAll, onClick, movies, sortValue, sortingOnChange} = props;
+    const { filters, all, onClickAll, onClick, movies, sortValue, sortingOnChange, deleteMovie, editMovie } = props;
 
     return (
         <Wrapper>
@@ -28,6 +28,8 @@ const MoviesResult = (props) => {
                 <MoviesList
                     movies = {movies}
                     sortValue = {sortValue}
+                    deleteMovie = {deleteMovie}
+                    editMovie = {editMovie}
                 />
             ) : <NoFound/>
             }
@@ -59,6 +61,8 @@ MoviesResult.propTypes = {
     onClick: PropTypes.func.isRequired,
     sortValue: PropTypes.string.isRequired,
     sortingOnChange: PropTypes.func.isRequired,
+    deleteMovie: PropTypes.func.isRequired,
+    editMovie: PropTypes.func.isRequired
 };
 
 export default MoviesResult;
