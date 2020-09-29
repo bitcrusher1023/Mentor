@@ -8,7 +8,7 @@ import MoviesList from './MoviesList';
 import NoFound from '../components/NoFound';
 
 const MoviesResult = (props) => {
-    const { filters, all, onClickAll, onClick, movies, sortValue, sortingOnChange, deleteMovie, editMovie } = props;
+    const { filters, all, onClickAll, onClick, movies, sortValue, sortingOnChange, deleteMovie, editMovie} = props;
 
     return (
         <Wrapper>

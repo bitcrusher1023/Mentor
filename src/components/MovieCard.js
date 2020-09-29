@@ -1,8 +1,9 @@
 /* eslint-disable react/forbid-prop-types */
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import MovieAction from '../containers/MovieAction';
+import MovieDetails from '../containers/MovieDetails';
 
 const MovieCard = (props) => {
     const { movie, title, genre, date, image, deleteMovie, editMovie } = props;
@@ -13,26 +14,54 @@ const MovieCard = (props) => {
         setHovered(!isHovered);
     };
 
+    const [showMovieDetails, setShowMovieDetails] = useState(false);
+
+    const handleShowMovieDetails = useCallback(() => {
+        setShowMovieDetails(!showMovieDetails);
+    }, [showMovieDetails]);
+
+    const [movieDetailsData, setMovieDetails] = useState(null);
+
+    const handleClick = useCallback(item => {
+        setMovieDetails(item);
+    }, [movie]);
+
+    const handleMovieDetails = () => {
+        handleClick(movie);
+        handleShowMovieDetails();
+    };
+
+    const handleSearch = () => {
+        handleShowMovieDetails();
+    };
+
     return (
-        <Wrapper 
-            onMouseEnter={handleHover}
-            onMouseLeave={handleHover}>
-            <Poster image={image}>
-                <MovieAction 
-                    {...{isHovered}}
-                    movie = {movie}
-                    onDeleteMovie = {deleteMovie}
-                    onEditMovie = {editMovie}
-                />
-            </Poster>
-            <MovieInfo>
-                <MovieInfoCol>
-                    <Title>{title}</Title>
-                    <Genre>{genre}</Genre>
-                </MovieInfoCol>
-                <ReleaseDate>{date}</ReleaseDate>
-            </MovieInfo>
-        </Wrapper>
+        <>
+            {showMovieDetails && <MovieDetails 
+                movieData = {movieDetailsData}
+                handleSearch = {handleSearch}
+            />}
+            <Wrapper 
+                onMouseEnter={handleHover}
+                onMouseLeave={handleHover}
+                onClick={handleMovieDetails}>
+                <Poster image={image}>
+                    <MovieAction 
+                        {...{isHovered}}
+                        movie = {movie}
+                        onDeleteMovie = {deleteMovie}
+                        onEditMovie = {editMovie}
+                    />
+                </Poster>
+                <MovieInfo>
+                    <MovieInfoCol>
+                        <Title>{title}</Title>
+                        <Genre>{genre}</Genre>
+                    </MovieInfoCol>
+                    <ReleaseDate>{date}</ReleaseDate>
+                </MovieInfo>
+            </Wrapper>
+        </>
     );
 };
 
