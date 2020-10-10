@@ -6,8 +6,9 @@ const moviesData = [
         genre: 'Action',
         date: '2016',
         url: '',
-        overview: '',
-        runtime: ''
+        overview: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam accumsan commodo ligula, non gravida arcu imperdiet sed. Donec eu nibh id lectus molestie volutpat non vel sapien. Proin nec imperdiet lectus.',
+        runtime: '146',
+        rating: '4.8'
     },
     {
         id: 2,
@@ -16,8 +17,9 @@ const moviesData = [
         genre: 'Cartoon',
         date: '2018',
         url: '',
-        overview: '',
-        runtime: ''
+        overview: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam accumsan commodo ligula, non gravida arcu imperdiet sed. Donec eu nibh id lectus molestie volutpat non vel sapien. Proin nec imperdiet lectus.',
+        runtime: '148',
+        rating: '4.4'
     },
     {
         id: 3,
@@ -26,8 +28,9 @@ const moviesData = [
         genre: 'Action',
         date: '2017',
         url: '',
-        overview: '',
-        runtime: ''
+        overview: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam accumsan commodo ligula, non gravida arcu imperdiet sed. Donec eu nibh id lectus molestie volutpat non vel sapien. Proin nec imperdiet lectus.',
+        runtime: '153',
+        rating: '4.3'
     },
     {
         id: 4,
@@ -36,8 +39,9 @@ const moviesData = [
         genre: 'Adventure',
         date: '2018',
         url: '',
-        overview: '',
-        runtime: ''
+        overview: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam accumsan commodo ligula, non gravida arcu imperdiet sed. Donec eu nibh id lectus molestie volutpat non vel sapien. Proin nec imperdiet lectus.',
+        runtime: '152',
+        rating: '4.9'
     },
     {
         id: 5,
@@ -46,8 +50,9 @@ const moviesData = [
         genre: 'Action',
         date: '2019',
         url: '',
-        overview: '',
-        runtime: ''
+        overview: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam accumsan commodo ligula, non gravida arcu imperdiet sed. Donec eu nibh id lectus molestie volutpat non vel sapien. Proin nec imperdiet lectus.',
+        runtime: '160',
+        rating: '4.8'
     },
     {
         id: 6,
@@ -56,8 +61,9 @@ const moviesData = [
         genre: 'Cartoon',
         date: '2015',
         url: '',
-        overview: '',
-        runtime: ''
+        overview: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam accumsan commodo ligula, non gravida arcu imperdiet sed. Donec eu nibh id lectus molestie volutpat non vel sapien. Proin nec imperdiet lectus.',
+        runtime: '154',
+        rating: '4.7'
     }
 ];
 
