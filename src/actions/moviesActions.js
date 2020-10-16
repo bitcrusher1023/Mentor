@@ -19,4 +19,3 @@ const getMovies = data => (dispatch, getState) => {
 };
 
 export default getMovies;
-

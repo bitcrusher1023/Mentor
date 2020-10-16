@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Logo from '../components/Logo';
 
-const MovieDetails = ({movieData, handleSearch}) => {
+const MovieDetails = ({ movieData, handleSearch }) => {
 
     return (
         <Wrapper>

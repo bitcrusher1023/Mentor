@@ -1,18 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const SearchBar = (props) => {
-    const { searchValue, searchOnChange, handleKeyDown, handleSearch } = props;
+import getMovies from '../actions/moviesActions';
+
+const SearchBar = () => {
+    const [value, setValue] = useState('');
+    const dispatch = useDispatch();
+
+    const handleSearch = () => {
+        dispatch(getMovies(value))
+    }
+
+    const handleSearchByEnter = (ev) => {
+        if (ev.target.code === 'Enter') {
+            dispatch(getMovies(value))
+        }
+    }
+
     return (
         <>
             <SearchText>find your movies</SearchText>
             <Wrapper>
                 <SearchInput type="text"
                     placeholder = 'What do you want to watch?'
-                    value = {searchValue}
-                    onChange = {searchOnChange}
-                    onKeyDown = {handleKeyDown}
+                    value = {value}
+                    onChange = {ev => { setValue(ev.target.value) }}
+                    onKeyDown = {handleSearchByEnter}
                 />
                 <Button type="button" onClick = {handleSearch}> Search </Button>
             </Wrapper>
