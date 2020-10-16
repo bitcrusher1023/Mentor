@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 import MovieCard from '../components/MovieCard';
+import { getMovies } from '../actions/moviesActions';
 
 const MoviesList = (props) => {
-    const { movies, sortValue, deleteMovie, editMovie } = props;
+    const { movies, sortValue, deleteMovie, editMovie} = props;
     const moviesList = [...movies];
 
     moviesList.sort((a,b) => {
@@ -20,19 +22,13 @@ const MoviesList = (props) => {
                 {moviesList.map((movie) => (
                     <MovieCard
                         movie = {movie}
-                        // image = {movie.image}
-                        // title = {movie.title}
-                        // genre = {movie.genre}
-                        // date = {movie.date}
-                        // key = {movie.id}
+                        image = {movie.image}
+                        title = {movie.title}
+                        genre = {movie.genre}
+                        date = {movie.date}
+                        key = {movie.id}
                         deleteMovie = {deleteMovie}
                         editMovie = {editMovie}
-
-                        key = {movie.id}
-                        image = {movie.poster_path}
-                        title = {movie.title}
-                        genre = {movie.genres}
-                        date = {movie.release_date}
                     />
                 ))}
             </Wrapper>

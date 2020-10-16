@@ -6,9 +6,14 @@ import MoviesFilter from './MoviesFilter';
 import MoviesSorting from '../components/MoviesSorting';
 import MoviesList from './MoviesList';
 import NoFound from '../components/NoFound';
+// import { moviesData } from '../data';
 
 const MoviesResult = (props) => {
-    const { filters, all, onClickAll, onClick, movies, sortValue, sortingOnChange, deleteMovie, editMovie} = props;
+    const { filters, all, onClickAll, onClick, movies, sortValue, sortingOnChange, deleteMovie, editMovie, getMovies} = props;
+
+    // getMovies(moviesData);
+
+    console.log('MoviesResult', movies);
 
     return (
         <Wrapper>

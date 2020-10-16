@@ -1,11 +1,15 @@
 /* eslint-disable no-param-reassign */
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { moviesData, filtersData } from '../data';
 import Header from '../components/Header';
 import MoviesResult from './MoviesResult';
 import Footer from '../components/Footer';
 import ErrorBoundary from './ErrorBounding';
+// import { getMovies } from '../actions/moviesActions';
+import getMoviesAction from '../actions/moviesActions';
 
 class App extends PureComponent {
     // eslint-disable-next-line react/state-in-constructor
@@ -17,6 +21,20 @@ class App extends PureComponent {
         movies: moviesData,
         defaultMoviesData: moviesData
     }
+
+    // componentWillMount() {
+    //     const {getMovies} = this.props;
+    //     getMovies();
+    // }
+
+    componentDidMount() {
+        const {getMovies} = this.props;
+        getMovies();
+    }
+
+    // componentDidUpdate() {
+    //     this.props.getMovies();
+    // }
 
     addMovie = (movieData) => {
         const { movies } = this.state;
@@ -136,6 +154,9 @@ class App extends PureComponent {
     render() {
         const {filters, searchValue, movies, all, sortValue} = this.state;
 
+        const { movies2 } = this.props;
+        // const { movies2 } = this.props.getMovies();
+
         return (
             <>
                 <Wrapper>
@@ -154,7 +175,7 @@ class App extends PureComponent {
                             all = {all}
                             onClickAll={this.setAll}
                             onClick={this.setFilter}
-                            movies = {movies}
+                            movies = {movies2}
                             sortValue = {sortValue}
                             sortingOnChange={this.sortingOnChange}
                             deleteMovie = {this.deleteMovie}
@@ -172,4 +193,19 @@ const Wrapper = styled.div`
     background: #555;
 `;
 
-export default App;
+const mapStateToProps = store => {
+    console.log(store);
+    return {
+        movies2: store.movies.movies,
+    };
+};
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+    getMovies: getMoviesAction
+}, dispatch);
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(App);
+
