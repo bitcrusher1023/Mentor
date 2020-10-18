@@ -6,7 +6,7 @@ import SearchBar from '../containers/SearchBar';
 import AddMovie from './AddMovie';
 import AddMovieModal from '../containers/AddMovieModal';
 
-const Header = ({ searchValue, searchOnChange, handleKeyDown, handleSearch, addMovie }) => {
+const Header = ({ addMovie }) => {
     const [showModal, setShow] = useState(false);
 
     const handleShow = () => {
@@ -38,12 +38,7 @@ const Header = ({ searchValue, searchOnChange, handleKeyDown, handleSearch, addM
                     <AddMovie {...{handleShow}}/>
                     { showModal && <AddMovieModal {...{showModal, handleShow, initialData, onSubmit}}/> }
                 </HeaderTop>
-                <SearchBar
-                    searchValue = {searchValue} 
-                    searchOnChange = {searchOnChange}
-                    handleKeyDown = {handleKeyDown}
-                    handleSearch = {handleSearch}
-                />
+                <SearchBar/>
             </WrapBg>
         </Wrapper>
     );
@@ -74,18 +69,10 @@ const HeaderTop = styled.div`
 `;
 
 Header.propTypes = {
-    searchValue: PropTypes.string,
-    searchOnChange: PropTypes.func,
-    handleKeyDown: PropTypes.func,
-    handleSearch: PropTypes.func,
     addMovie: PropTypes.func
 };
 
 Header.defaultProps = {
-    searchValue: '',
-    searchOnChange: () => {},
-    handleKeyDown: () => {},
-    handleSearch: () => {},
     addMovie: () => {}
 };
 

@@ -1,23 +1,27 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
 import getMovies from '../actions/moviesActions';
+import { setSearchValue } from '../actions/searchActions';
 
 const SearchBar = () => {
     const [value, setValue] = useState('');
     const dispatch = useDispatch();
 
     const handleSearch = () => {
-        dispatch(getMovies(value))
-    }
+        dispatch(getMovies({searchValue: value}));
+    };
 
     const handleSearchByEnter = (ev) => {
-        if (ev.target.code === 'Enter') {
-            dispatch(getMovies(value))
+        if (ev.key === 'Enter') {
+            dispatch(getMovies({searchValue: value}));
         }
-    }
+    };
+
+    const handleSetValue = (ev) => {
+        setValue(ev.target.value);
+        dispatch(setSearchValue(ev.target.value));
+    };
 
     return (
         <>
@@ -26,7 +30,7 @@ const SearchBar = () => {
                 <SearchInput type="text"
                     placeholder = 'What do you want to watch?'
                     value = {value}
-                    onChange = {ev => { setValue(ev.target.value) }}
+                    onChange = {handleSetValue}
                     onKeyDown = {handleSearchByEnter}
                 />
                 <Button type="button" onClick = {handleSearch}> Search </Button>
@@ -71,19 +75,5 @@ const Button = styled.button`
     color: #fff;
     text-transform: uppercase;
 `;
-
-SearchBar.propTypes = {
-    searchValue: PropTypes.string,
-    searchOnChange: PropTypes.func,
-    handleKeyDown: PropTypes.func,
-    handleSearch: PropTypes.func
-};
-
-SearchBar.defaultProps = {
-    searchValue: '',
-    searchOnChange: () => {},
-    handleKeyDown: () => {},
-    handleSearch: () => {}
-};
 
 export default SearchBar;

@@ -6,33 +6,21 @@ import MoviesFilter from './MoviesFilter';
 import MoviesSorting from '../components/MoviesSorting';
 import MoviesList from './MoviesList';
 import NoFound from '../components/NoFound';
-// import { moviesData } from '../data';
 
 const MoviesResult = (props) => {
-    const { filters, all, onClickAll, onClick, movies, sortValue, sortingOnChange, deleteMovie, editMovie, getMovies} = props;
-
-    // getMovies(moviesData);
-
-    console.log('MoviesResult', movies);
+    const {movies, deleteMovie, editMovie } = props;
 
     return (
         <Wrapper>
             <ActionBar>
                 <MoviesFilter
-                    filters = {filters}
-                    all = {all}
-                    onClickAll = {onClickAll}
-                    onClick = {onClick}
                 />
                 <MoviesSorting
-                    sortValue = {sortValue}
-                    sortingOnChange = {sortingOnChange}
                 />
             </ActionBar>
             {movies.length ? (
                 <MoviesList
                     movies = {movies}
-                    sortValue = {sortValue}
                     deleteMovie = {deleteMovie}
                     editMovie = {editMovie}
                 />
@@ -60,12 +48,6 @@ const ActionBar = styled.div`
 
 MoviesResult.propTypes = {
     movies: PropTypes.array.isRequired,
-    filters: PropTypes.array.isRequired,
-    all: PropTypes.bool.isRequired,
-    onClickAll: PropTypes.func.isRequired,
-    onClick: PropTypes.func.isRequired,
-    sortValue: PropTypes.string.isRequired,
-    sortingOnChange: PropTypes.func.isRequired,
     deleteMovie: PropTypes.func.isRequired,
     editMovie: PropTypes.func.isRequired
 };
