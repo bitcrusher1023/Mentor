@@ -3,12 +3,12 @@ import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Header from '../components/Header';
+import Header from './Header';
 import MoviesResult from './MoviesResult';
 import Footer from '../components/Footer';
 import ErrorBoundary from './ErrorBounding';
-import getMoviesAction from '../actions/moviesActions';
-import { getAllMovies } from '../selectors';
+import getMoviesAction from '../store/actions/moviesActions';
+import { getAllMovies } from '../store/selectors';
 
 class App extends PureComponent {
 

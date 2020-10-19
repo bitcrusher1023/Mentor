@@ -1,12 +1,11 @@
 import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Logo from './Logo';
-import SearchBar from '../containers/SearchBar';
-import AddMovie from './AddMovie';
-import AddMovieModal from '../containers/AddMovieModal';
-import { addMovie } from '../actions/moviesActions';
+import Logo from '../components/Logo';
+import SearchBar from './SearchBar';
+import AddMovie from '../components/AddMovie';
+import AddMovieModal from './AddMovieModal';
+import { addMovie } from '../store/actions/moviesActions';
 
 const Header = () => {
     const [showModal, setShow] = useState(false);
@@ -71,13 +70,5 @@ const HeaderTop = styled.div`
     display: flex;
     justify-content: space-between;
 `;
-
-Header.propTypes = {
-    addMovie: PropTypes.func
-};
-
-Header.defaultProps = {
-    addMovie: () => {}
-};
 
 export default Header;

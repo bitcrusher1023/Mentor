@@ -20,15 +20,15 @@ const MovieDetails = ({ movieData, handleSearch }) => {
                 </SearchWrap>
             </RowHeader>
             <Row>
-                <Poster image={movieData.image} />
+                <Poster image={movieData.poster_path} />
                 <MovieInfo>
                     <MovieInfoCol>
                         <Title>{movieData.title}</Title>
-                        <Rating>{movieData.rating}</Rating>
+                        <Rating>{movieData.vote_average}</Rating>
                     </MovieInfoCol>
-                    <Genre>{movieData.genre}</Genre>
+                    <Genre>{movieData.genres.join(' ')}</Genre>
                     <MovieInfoCol>
-                        <ReleaseDate>{movieData.date}</ReleaseDate>
+                        <ReleaseDate>{movieData.release_date}</ReleaseDate>
                         <Runtime>{movieData.runtime} min</Runtime>
                     </MovieInfoCol>
                     <Overview>{movieData.overview}</Overview>

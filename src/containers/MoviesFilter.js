@@ -5,8 +5,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { setAllFilters, setFilters } from '../actions/filtersActions';
-import getMovies from '../actions/moviesActions';
+import { setAllFilters, setFilters } from '../store/actions/filtersActions';
+import getMovies from '../store/actions/moviesActions';
 
 const MoviesFilter = () => {
     const filtersAll = useSelector(state => state.filters.allFilters);

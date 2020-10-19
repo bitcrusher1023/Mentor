@@ -2,7 +2,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { setSortingValue, sortMovies } from '../actions/sortingActions';
+import { setSortingValue, sortMovies } from '../store/actions/sortingActions';
 
 const MoviesSorting = () => {
     const dispatch = useDispatch();

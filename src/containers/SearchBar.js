@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import getMovies from '../actions/moviesActions';
-import { setSearchValue } from '../actions/searchActions';
+import getMovies from '../store/actions/moviesActions';
+import { setSearchValue } from '../store/actions/searchActions';
 
 const SearchBar = () => {
     const [value, setValue] = useState('');

@@ -19,7 +19,7 @@ const MoviesList = (props) => {
                         key = {movie.id}
                         image = {movie.poster_path}
                         title = {movie.title}
-                        genre = {movie.genres}
+                        genres = {movie.genres}
                         date = {movie.release_date}
                     />
                 ))}

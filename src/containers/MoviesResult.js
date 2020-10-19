@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import MoviesFilter from './MoviesFilter';
-import MoviesSorting from '../components/MoviesSorting';
+import MoviesSorting from './MoviesSorting';
 import MoviesList from './MoviesList';
 import NoFound from '../components/NoFound';
 

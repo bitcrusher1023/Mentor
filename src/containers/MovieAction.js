@@ -6,7 +6,7 @@ import MovieActionButton from '../components/MovieActionButton';
 import ActionOptions from './ActionOptions';
 import DeleteMovie from '../components/DeleteMovie';
 import AddMovieModal from './AddMovieModal';
-import { deleteMovies, updateMovie } from '../actions/moviesActions';
+import { deleteMovies, updateMovie } from '../store/actions/moviesActions';
 
 const MovieAction = ({isHovered, movie}) => {
     const [showOptions, setShowOptions] = useState(false);

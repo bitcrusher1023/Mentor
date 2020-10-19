@@ -6,7 +6,7 @@ import MovieAction from '../containers/MovieAction';
 import MovieDetails from '../containers/MovieDetails';
 
 const MovieCard = (props) => {
-    const { movie, title, genre, date, image } = props;
+    const { movie, title, genres, date, image } = props;
 
     const [isHovered, setHovered] = useState(false);
 
@@ -54,7 +54,7 @@ const MovieCard = (props) => {
                 <MovieInfo>
                     <MovieInfoCol>
                         <Title>{title}</Title>
-                        <Genre>{genre}</Genre>
+                        <Genre>{genres.join(' ')}</Genre>
                     </MovieInfoCol>
                     <ReleaseDate>{date}</ReleaseDate>
                 </MovieInfo>
@@ -111,14 +111,14 @@ const ReleaseDate = styled.p`
 MovieCard.propTypes = {
     image: PropTypes.string,
     title: PropTypes.string.isRequired,
-    genre: PropTypes.array,
+    genres: PropTypes.array,
     date: PropTypes.string.isRequired,
     movie: PropTypes.object.isRequired
 };
 
 MovieCard.defaultProps = {
     image: 'https://cdn3.vectorstock.com/i/1000x1000/50/07/http-404-not-found-error-message-hypertext-vector-20025007.jpg',
-    genre: ''
+    genres: []
 };
 
 export default MovieCard;
