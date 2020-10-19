@@ -1,13 +1,16 @@
 import React, {useState} from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Logo from './Logo';
 import SearchBar from '../containers/SearchBar';
 import AddMovie from './AddMovie';
 import AddMovieModal from '../containers/AddMovieModal';
+import { addMovie } from '../actions/moviesActions';
 
-const Header = ({ addMovie }) => {
+const Header = () => {
     const [showModal, setShow] = useState(false);
+    const dispatch = useDispatch();
 
     const handleShow = () => {
         setShow(!showModal);
@@ -15,18 +18,21 @@ const Header = ({ addMovie }) => {
 
     const [initialData] = useState({
         title: '',
-        date: '',
-        url: '',
+        release_date: '',
+        poster_path: '',
         overview: '',
-        runtime: ''
+        runtime: 0,
+        genres: ['Comedy', 'Drama', 'Romance' ]
     });
 
     const onSubmit = (movieData) => {
+        movieData.runtime = Number(movieData.runtime);
         const newMoveData = {
             ...movieData,
-            id: new Date().getTime()
+            // id: new Date().getTime()
         };
-        addMovie(newMoveData);
+        // addMovie(newMoveData);
+        dispatch(addMovie(newMoveData));
         handleShow();
     };
 

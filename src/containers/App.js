@@ -8,7 +8,6 @@ import Header from '../components/Header';
 import MoviesResult from './MoviesResult';
 import Footer from '../components/Footer';
 import ErrorBoundary from './ErrorBounding';
-// import { getMovies } from '../actions/moviesActions';
 import getMoviesAction from '../actions/moviesActions';
 import { getAllMovies } from '../selectors';
 
@@ -22,23 +21,6 @@ class App extends PureComponent {
     componentDidMount() {
         const {getMovies} = this.props;
         getMovies();
-    }
-
-    addMovie = (movieData) => {
-        const { movies } = this.state;
-
-        this.setState({
-            movies: [...movies, movieData]
-        });
-    }
-
-    deleteMovie = (movieId) => {
-        const { movies } = this.state;
-        const newMovies = movies.filter(movie => movie.id !== movieId);
-
-        this.setState({
-            movies: newMovies
-        });
     }
 
     editMovie = (movieData) => {
@@ -79,14 +61,11 @@ class App extends PureComponent {
             <>
                 <Wrapper>
                     <ErrorBoundary>
-                        <Header
-                            addMovie = {this.addMovie}
-                        />
+                        <Header/>
                     </ErrorBoundary>
                     <ErrorBoundary>
                         <MoviesResult
                             movies = {movies2}
-                            deleteMovie = {this.deleteMovie}
                             editMovie = {this.editMovie}
                         />
                     </ErrorBoundary>

@@ -8,7 +8,7 @@ import MoviesList from './MoviesList';
 import NoFound from '../components/NoFound';
 
 const MoviesResult = (props) => {
-    const {movies, deleteMovie, editMovie } = props;
+    const {movies, editMovie } = props;
 
     return (
         <Wrapper>
@@ -21,7 +21,6 @@ const MoviesResult = (props) => {
             {movies.length ? (
                 <MoviesList
                     movies = {movies}
-                    deleteMovie = {deleteMovie}
                     editMovie = {editMovie}
                 />
             ) : <NoFound/>
@@ -48,7 +47,6 @@ const ActionBar = styled.div`
 
 MoviesResult.propTypes = {
     movies: PropTypes.array.isRequired,
-    deleteMovie: PropTypes.func.isRequired,
     editMovie: PropTypes.func.isRequired
 };
 

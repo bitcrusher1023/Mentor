@@ -6,7 +6,7 @@ import MovieAction from '../containers/MovieAction';
 import MovieDetails from '../containers/MovieDetails';
 
 const MovieCard = (props) => {
-    const { movie, title, genre, date, image, deleteMovie, editMovie } = props;
+    const { movie, title, genre, date, image, editMovie } = props;
 
     const [isHovered, setHovered] = useState(false);
 
@@ -49,7 +49,6 @@ const MovieCard = (props) => {
                     <MovieAction 
                         {...{isHovered}}
                         movie = {movie}
-                        onDeleteMovie = {deleteMovie}
                         onEditMovie = {editMovie}
                     />
                 </Poster>
@@ -115,7 +114,6 @@ MovieCard.propTypes = {
     title: PropTypes.string.isRequired,
     genre: PropTypes.string,
     date: PropTypes.string.isRequired,
-    deleteMovie: PropTypes.func.isRequired,
     editMovie: PropTypes.func.isRequired,
     movie: PropTypes.object.isRequired
 };

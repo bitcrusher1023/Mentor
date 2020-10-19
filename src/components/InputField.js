@@ -37,7 +37,10 @@ const Input = styled.input`
 InputField.propTypes = {
     label: PropTypes.string,
     type: PropTypes.string,
-    value: PropTypes.string,
+    value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]),
     placeholder: PropTypes.string,
     onChange: PropTypes.func
 };
@@ -45,7 +48,7 @@ InputField.propTypes = {
 InputField.defaultProps = {
     label: '',
     type: 'text',
-    value: '',
+    value: '' || 0,
     placeholder: '',
     onChange: () => {},
 };

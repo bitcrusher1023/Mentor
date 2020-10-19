@@ -3,9 +3,11 @@ import { searchValueSelector, getFilter, sortValueSelector, getAllMovies } from 
 
 const API_GATEWAY_HOST = `http://localhost:4000`;
 const SUCCESS_DELETE_CODE = 204;
+const SUCCESS_ADD_CODE = 201;
 
 export const GET_MOVIES = 'GET_MOVIES';
 export const GET_MOVIES_REQUEST = 'GET_MOVIES_REQUEST';
+export const ADD_MOVIE = 'ADD_MOVIE';
 export const DELETE_MOVIE = 'DELETE_MOVIE';
 
 const getMovies = () => (dispatch, getState) => {
@@ -25,6 +27,24 @@ const getMovies = () => (dispatch, getState) => {
             type: GET_MOVIES_REQUEST,
             payload: response.data.data
         });
+    });
+};
+
+export const addMovie = (movieData) => (dispatch, getState) => {
+
+    const url = `${API_GATEWAY_HOST}/movies`;
+    const movies = getAllMovies(getState());
+    // const newMovies = [movieData, ...movies];
+
+    const request = axios.post(url, {...movieData});
+
+    request.then(response => {
+        if (response.status === SUCCESS_ADD_CODE) {
+            dispatch({
+                type: ADD_MOVIE,
+                payload: [response.data, ...movies]
+            });
+        };
     });
 };
 

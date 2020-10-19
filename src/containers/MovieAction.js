@@ -8,7 +8,7 @@ import DeleteMovie from '../components/DeleteMovie';
 import AddMovieModal from './AddMovieModal';
 import { deleteMovies } from '../actions/moviesActions';
 
-const MovieAction = ({isHovered, movie, onDeleteMovie, onEditMovie}) => {
+const MovieAction = ({isHovered, movie, onEditMovie}) => {
     const [showOptions, setShowOptions] = useState(false);
     const dispatch = useDispatch();
 
@@ -45,7 +45,6 @@ const MovieAction = ({isHovered, movie, onDeleteMovie, onEditMovie}) => {
     };
 
     const onDelete = () => {
-        // onDeleteMovie(movie.id);
         dispatch(deleteMovies(movie.id));
     };
 
@@ -71,12 +70,10 @@ const MovieAction = ({isHovered, movie, onDeleteMovie, onEditMovie}) => {
 MovieAction.propTypes = {
     isHovered: PropTypes.bool.isRequired,
     movie: PropTypes.object.isRequired,
-    onDeleteMovie: PropTypes.func,
     onEditMovie: PropTypes.func
 };
 
 MovieAction.defaultProps = {
-    onDeleteMovie: () => {},
     onEditMovie: () => {}
 };
 
