@@ -1,13 +1,16 @@
 /* eslint-disable react/forbid-prop-types */
 import React, {useState} from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import MovieActionButton from '../components/MovieActionButton';
 import ActionOptions from './ActionOptions';
 import DeleteMovie from '../components/DeleteMovie';
 import AddMovieModal from './AddMovieModal';
+import { deleteMovies } from '../actions/moviesActions';
 
 const MovieAction = ({isHovered, movie, onDeleteMovie, onEditMovie}) => {
     const [showOptions, setShowOptions] = useState(false);
+    const dispatch = useDispatch();
 
     const handleShowOptions = () => {
         setShowOptions(!showOptions);
@@ -42,7 +45,8 @@ const MovieAction = ({isHovered, movie, onDeleteMovie, onEditMovie}) => {
     };
 
     const onDelete = () => {
-        onDeleteMovie(movie.id);
+        // onDeleteMovie(movie.id);
+        dispatch(deleteMovies(movie.id));
     };
 
     const [initialData] = useState({

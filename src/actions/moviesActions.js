@@ -1,14 +1,15 @@
 import axios from "axios";
-import { searchValueSelector, getFilter, sortValueSelector } from '../selectors';
+import { searchValueSelector, getFilter, sortValueSelector, getAllMovies } from '../selectors';
 
-const ROOT_URL = `http://localhost:4000`;
+const API_GATEWAY_HOST = `http://localhost:4000`;
+const SUCCESS_DELETE_CODE = 204;
 
 export const GET_MOVIES = 'GET_MOVIES';
 export const GET_MOVIES_REQUEST = 'GET_MOVIES_REQUEST';
-export const GET_MOVIES_SUCCESS = 'GET_MOVIES_SUCCESS';
+export const DELETE_MOVIE = 'DELETE_MOVIE';
 
 const getMovies = () => (dispatch, getState) => {
-    const url = `${ROOT_URL}/movies`;
+    const url = `${API_GATEWAY_HOST}/movies`;
     const params = {};
     params.search = searchValueSelector(getState());
     params.searchBy = 'title';
@@ -24,6 +25,24 @@ const getMovies = () => (dispatch, getState) => {
             type: GET_MOVIES_REQUEST,
             payload: response.data.data
         });
+    });
+};
+
+export const deleteMovies = (movieId) => (dispatch, getState) => {
+
+    const url = `${API_GATEWAY_HOST}/movies/${movieId}`;
+    const movies = getAllMovies(getState());
+    const newMovies = [...movies].filter(item => item.id !== movieId);
+
+    const request = axios.delete(url);
+
+    request.then(response => {
+        if (response.status === SUCCESS_DELETE_CODE) {
+            dispatch({
+                type: DELETE_MOVIE,
+                payload: newMovies
+            });
+        }
     });
 };
 
