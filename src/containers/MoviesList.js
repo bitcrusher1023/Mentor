@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import MovieCard from '../components/MovieCard';
 
 const MoviesList = (props) => {
-    const { movies, editMovie } = props;
+    const { movies } = props;
     const moviesList = [...movies];
     
     return (
@@ -16,7 +16,6 @@ const MoviesList = (props) => {
                 {moviesList.map((movie) => (
                     <MovieCard
                         movie = {movie}
-                        editMovie = {editMovie}
                         key = {movie.id}
                         image = {movie.poster_path}
                         title = {movie.title}
@@ -44,11 +43,6 @@ const MoviesCount = styled.p`
 MoviesList.propTypes = {
     // eslint-disable-next-line react/forbid-prop-types
     movies: PropTypes.array.isRequired,
-    editMovie: PropTypes.func
-};
-
-MoviesList.defaultProps = {
-    editMovie: () => {}
 };
 
 export default MoviesList;

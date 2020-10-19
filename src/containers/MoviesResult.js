@@ -8,7 +8,7 @@ import MoviesList from './MoviesList';
 import NoFound from '../components/NoFound';
 
 const MoviesResult = (props) => {
-    const {movies, editMovie } = props;
+    const { movies } = props;
 
     return (
         <Wrapper>
@@ -21,7 +21,6 @@ const MoviesResult = (props) => {
             {movies.length ? (
                 <MoviesList
                     movies = {movies}
-                    editMovie = {editMovie}
                 />
             ) : <NoFound/>
             }
@@ -46,8 +45,7 @@ const ActionBar = styled.div`
 `;
 
 MoviesResult.propTypes = {
-    movies: PropTypes.array.isRequired,
-    editMovie: PropTypes.func.isRequired
+    movies: PropTypes.array.isRequired
 };
 
 export default MoviesResult;

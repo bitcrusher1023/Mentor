@@ -6,9 +6,9 @@ import MovieActionButton from '../components/MovieActionButton';
 import ActionOptions from './ActionOptions';
 import DeleteMovie from '../components/DeleteMovie';
 import AddMovieModal from './AddMovieModal';
-import { deleteMovies } from '../actions/moviesActions';
+import { deleteMovies, updateMovie } from '../actions/moviesActions';
 
-const MovieAction = ({isHovered, movie, onEditMovie}) => {
+const MovieAction = ({isHovered, movie}) => {
     const [showOptions, setShowOptions] = useState(false);
     const dispatch = useDispatch();
 
@@ -53,7 +53,7 @@ const MovieAction = ({isHovered, movie, onEditMovie}) => {
     });
 
     const onSubmit = (movieData) => {
-        onEditMovie(movieData);
+        dispatch(updateMovie(movieData));
         handleShow();
     };
 
@@ -69,12 +69,7 @@ const MovieAction = ({isHovered, movie, onEditMovie}) => {
 
 MovieAction.propTypes = {
     isHovered: PropTypes.bool.isRequired,
-    movie: PropTypes.object.isRequired,
-    onEditMovie: PropTypes.func
-};
-
-MovieAction.defaultProps = {
-    onEditMovie: () => {}
+    movie: PropTypes.object.isRequired
 };
 
 export default MovieAction;

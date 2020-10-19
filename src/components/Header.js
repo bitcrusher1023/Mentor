@@ -29,9 +29,7 @@ const Header = () => {
         movieData.runtime = Number(movieData.runtime);
         const newMoveData = {
             ...movieData,
-            // id: new Date().getTime()
         };
-        // addMovie(newMoveData);
         dispatch(addMovie(newMoveData));
         handleShow();
     };
