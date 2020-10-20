@@ -1,6 +1,8 @@
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable no-param-reassign */
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Header from './Header';
@@ -13,12 +15,12 @@ import { getAllMovies } from '../store/selectors';
 class App extends PureComponent {
 
     componentDidMount() {
-        const {getMovies} = this.props;
+        const { getMovies } = this.props;
         getMovies();
     }
 
     render() {
-        const { movies2 } = this.props;
+        const { moviesList } = this.props;
 
         return (
             <>
@@ -28,7 +30,7 @@ class App extends PureComponent {
                     </ErrorBoundary>
                     <ErrorBoundary>
                         <MoviesResult
-                            movies = {movies2}
+                            movies = {moviesList}
                         />
                     </ErrorBoundary>
                 </Wrapper>
@@ -42,8 +44,13 @@ const Wrapper = styled.div`
     background: #555;
 `;
 
+App.propTypes = {
+    moviesList: PropTypes.array.isRequired,
+    getMovies: PropTypes.func.isRequired
+};
+
 const mapStateToProps = state => ({
-    movies2: getAllMovies(state)
+    moviesList: getAllMovies(state)
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
