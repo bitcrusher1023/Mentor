@@ -19,7 +19,9 @@ export const sortMovies = () => (dispatch, getState) => {
             return 0;
         });
     } else {
-        movies = [...movies].sort((a, b) => b[sortBy] - a[sortBy]);
+        movies = [...movies].sort((a, b) => {
+            return a[sortBy] > b[sortBy] ? 1 : -1;
+        });
     }
 
     return dispatch({
