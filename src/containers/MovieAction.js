@@ -1,13 +1,16 @@
 /* eslint-disable react/forbid-prop-types */
 import React, {useState} from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import MovieActionButton from '../components/MovieActionButton';
 import ActionOptions from './ActionOptions';
 import DeleteMovie from '../components/DeleteMovie';
 import AddMovieModal from './AddMovieModal';
+import { deleteMovies, updateMovie } from '../store/actions/moviesActions';
 
-const MovieAction = ({isHovered, movie, onDeleteMovie, onEditMovie}) => {
+const MovieAction = ({isHovered, movie}) => {
     const [showOptions, setShowOptions] = useState(false);
+    const dispatch = useDispatch();
 
     const handleShowOptions = () => {
         setShowOptions(!showOptions);
@@ -42,7 +45,7 @@ const MovieAction = ({isHovered, movie, onDeleteMovie, onEditMovie}) => {
     };
 
     const onDelete = () => {
-        onDeleteMovie(movie.id);
+        dispatch(deleteMovies(movie.id));
     };
 
     const [initialData] = useState({
@@ -50,7 +53,7 @@ const MovieAction = ({isHovered, movie, onDeleteMovie, onEditMovie}) => {
     });
 
     const onSubmit = (movieData) => {
-        onEditMovie(movieData);
+        dispatch(updateMovie(movieData));
         handleShow();
     };
 
@@ -66,14 +69,7 @@ const MovieAction = ({isHovered, movie, onDeleteMovie, onEditMovie}) => {
 
 MovieAction.propTypes = {
     isHovered: PropTypes.bool.isRequired,
-    movie: PropTypes.object.isRequired,
-    onDeleteMovie: PropTypes.func,
-    onEditMovie: PropTypes.func
-};
-
-MovieAction.defaultProps = {
-    onDeleteMovie: () => {},
-    onEditMovie: () => {}
+    movie: PropTypes.object.isRequired
 };
 
 export default MovieAction;

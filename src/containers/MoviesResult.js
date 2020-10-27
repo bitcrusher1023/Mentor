@@ -3,33 +3,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import MoviesFilter from './MoviesFilter';
-import MoviesSorting from '../components/MoviesSorting';
+import MoviesSorting from './MoviesSorting';
 import MoviesList from './MoviesList';
 import NoFound from '../components/NoFound';
 
 const MoviesResult = (props) => {
-    const { filters, all, onClickAll, onClick, movies, sortValue, sortingOnChange, deleteMovie, editMovie} = props;
+    const { movies } = props;
 
     return (
         <Wrapper>
             <ActionBar>
                 <MoviesFilter
-                    filters = {filters}
-                    all = {all}
-                    onClickAll = {onClickAll}
-                    onClick = {onClick}
                 />
                 <MoviesSorting
-                    sortValue = {sortValue}
-                    sortingOnChange = {sortingOnChange}
                 />
             </ActionBar>
             {movies.length ? (
                 <MoviesList
                     movies = {movies}
-                    sortValue = {sortValue}
-                    deleteMovie = {deleteMovie}
-                    editMovie = {editMovie}
                 />
             ) : <NoFound/>
             }
@@ -54,15 +45,7 @@ const ActionBar = styled.div`
 `;
 
 MoviesResult.propTypes = {
-    movies: PropTypes.array.isRequired,
-    filters: PropTypes.array.isRequired,
-    all: PropTypes.bool.isRequired,
-    onClickAll: PropTypes.func.isRequired,
-    onClick: PropTypes.func.isRequired,
-    sortValue: PropTypes.string.isRequired,
-    sortingOnChange: PropTypes.func.isRequired,
-    deleteMovie: PropTypes.func.isRequired,
-    editMovie: PropTypes.func.isRequired
+    movies: PropTypes.array.isRequired
 };
 
 export default MoviesResult;

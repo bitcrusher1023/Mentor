@@ -1,13 +1,15 @@
 import React, {useState} from 'react';
-import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import Logo from './Logo';
-import SearchBar from '../containers/SearchBar';
-import AddMovie from './AddMovie';
-import AddMovieModal from '../containers/AddMovieModal';
+import Logo from '../components/Logo';
+import SearchBar from './SearchBar';
+import AddMovie from '../components/AddMovie';
+import AddMovieModal from './AddMovieModal';
+import { addMovie } from '../store/actions/moviesActions';
 
-const Header = ({ searchValue, searchOnChange, handleKeyDown, handleSearch, addMovie }) => {
+const Header = () => {
     const [showModal, setShow] = useState(false);
+    const dispatch = useDispatch();
 
     const handleShow = () => {
         setShow(!showModal);
@@ -15,18 +17,19 @@ const Header = ({ searchValue, searchOnChange, handleKeyDown, handleSearch, addM
 
     const [initialData] = useState({
         title: '',
-        date: '',
-        url: '',
+        release_date: '',
+        poster_path: '',
         overview: '',
-        runtime: ''
+        runtime: 0,
+        genres: ['Comedy', 'Drama', 'Romance' ]
     });
 
     const onSubmit = (movieData) => {
+        movieData.runtime = Number(movieData.runtime);
         const newMoveData = {
             ...movieData,
-            id: new Date().getTime()
         };
-        addMovie(newMoveData);
+        dispatch(addMovie(newMoveData));
         handleShow();
     };
 
@@ -38,12 +41,7 @@ const Header = ({ searchValue, searchOnChange, handleKeyDown, handleSearch, addM
                     <AddMovie {...{handleShow}}/>
                     { showModal && <AddMovieModal {...{showModal, handleShow, initialData, onSubmit}}/> }
                 </HeaderTop>
-                <SearchBar
-                    searchValue = {searchValue} 
-                    searchOnChange = {searchOnChange}
-                    handleKeyDown = {handleKeyDown}
-                    handleSearch = {handleSearch}
-                />
+                <SearchBar/>
             </WrapBg>
         </Wrapper>
     );
@@ -72,21 +70,5 @@ const HeaderTop = styled.div`
     display: flex;
     justify-content: space-between;
 `;
-
-Header.propTypes = {
-    searchValue: PropTypes.string,
-    searchOnChange: PropTypes.func,
-    handleKeyDown: PropTypes.func,
-    handleSearch: PropTypes.func,
-    addMovie: PropTypes.func
-};
-
-Header.defaultProps = {
-    searchValue: '',
-    searchOnChange: () => {},
-    handleKeyDown: () => {},
-    handleSearch: () => {},
-    addMovie: () => {}
-};
 
 export default Header;

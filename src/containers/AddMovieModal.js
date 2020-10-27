@@ -50,16 +50,16 @@ const AddMovieModal = ({handleShow, initialData, onSubmit}) => {
                     <InputField
                         label='Release date'
                         type='date'
-                        value={movieData.date}
+                        value={movieData.release_date}
                         placeholder='Select Date'
-                        onChange={handleChange('date')}
+                        onChange={handleChange('release_date')}
                     />
                     <InputField
                         label='Movie url'
                         type='url'
-                        value={movieData.url}
+                        value={movieData.poster_path}
                         placeholder='Movie url here'
-                        onChange={handleChange('url')}
+                        onChange={handleChange('poster_path')}
                     />
                     <InputField
                         label='Overview'

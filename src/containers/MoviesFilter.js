@@ -2,12 +2,32 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { setAllFilters, setFilters } from '../store/actions/filtersActions';
+import getMovies from '../store/actions/moviesActions';
 
-const MoviesFilter = (props) => {
-    const { onClickAll, all, onClick, filters } = props;
+const MoviesFilter = () => {
+    const filtersAll = useSelector(state => state.filters.allFilters);
+    const allChecked = useSelector(state => state.filters.allFiltersChecked);
+
+    const [allFilters, setFiltersData] = useState(filtersAll);
+
+    const dispatch = useDispatch();
+
+    const onClickAll = () => {
+        dispatch(setAllFilters());
+        dispatch(getMovies());
+    };
+
+    const onClickFilter = (ev) => {
+        ev.preventDefault();
+        const { index } = ev.currentTarget.dataset;
+        dispatch(setFilters(index));
+        dispatch(getMovies());
+    };
+
     return (
         <Form>
             <Ul>
@@ -15,13 +35,13 @@ const MoviesFilter = (props) => {
                     <Input
                         id = "all"
                         type="checkbox"
-                        checked={all}
+                        checked={allChecked}
                         onChange={() => {}}
                     />
                     <Label htmlFor="all">All</Label>
                 </li>
-                {filters.map((filter, i) =>
-                    <li  key={filter.id} data-index={i} onClick={onClick} >
+                {allFilters.map((filter, i) =>
+                    <li  key={filter.id} data-index={i} onClick={onClickFilter} >
                         <Input 
                             id={filter.name}
                             type="checkbox"
@@ -63,17 +83,5 @@ const Ul = styled.ul`
     list-style: none;
     padding: 0;
 `;
-
-MoviesFilter.propTypes = {
-    all: PropTypes.bool.isRequired,
-    onClickAll: PropTypes.func,
-    onClick: PropTypes.func,
-    filters: PropTypes.array.isRequired
-};
-
-MoviesFilter.defaultProps = {
-    onClickAll: () => {},
-    onClick: () => {}
-};
 
 export default MoviesFilter;

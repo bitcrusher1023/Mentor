@@ -1,18 +1,25 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { setSortingValue, sortMovies } from '../store/actions/sortingActions';
 
-const  MoviesSorting = props => {
-    const { sortingOnChange } = props;
+const MoviesSorting = () => {
+    const dispatch = useDispatch();
+
+    const sortingOnChange = (ev) => {
+        dispatch(setSortingValue(ev.target.value));
+        dispatch(sortMovies());
+
+    };
 
     return (
         <Form className="filter-menu">
             <Label htmlFor="seriesInput">Sort By</Label>
             <Select id="seriesInput" onChange={sortingOnChange}>
-                <option value="date">release date</option>
+                <option value="release_date">release date</option>
                 <option value="title">movie name</option>
-                <option value="genre">genre</option>
+                <option value="genres">genre</option>
             </Select>
         </Form>
     );
@@ -54,13 +61,5 @@ const Select = styled.select`
         color: #555;
     }
 `;
-
-MoviesSorting.propTypes = {
-    sortingOnChange: PropTypes.func
-};
-
-MoviesSorting.defaultProps = {
-    sortingOnChange: () => {}
-};
 
 export default MoviesSorting;
