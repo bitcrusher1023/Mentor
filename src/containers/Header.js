@@ -5,6 +5,7 @@ import Logo from '../components/Logo';
 import SearchBar from './SearchBar';
 import AddMovie from '../components/AddMovie';
 import AddMovieModal from './AddMovieModal';
+import MovieForm from './MovieForm';
 import { addMovie } from '../store/actions/moviesActions';
 
 const Header = () => {
@@ -21,17 +22,8 @@ const Header = () => {
         poster_path: '',
         overview: '',
         runtime: 0,
-        genres: ['Comedy', 'Drama', 'Romance' ]
+        genres: []
     });
-
-    const onSubmit = (movieData) => {
-        movieData.runtime = Number(movieData.runtime);
-        const newMoveData = {
-            ...movieData,
-        };
-        dispatch(addMovie(newMoveData));
-        handleShow();
-    };
 
     return (
         <Wrapper>
@@ -39,7 +31,7 @@ const Header = () => {
                 <HeaderTop>
                     <Logo><span>Netflix</span>roulette</Logo>
                     <AddMovie {...{handleShow}}/>
-                    { showModal && <AddMovieModal {...{showModal, handleShow, initialData, onSubmit}}/> }
+                    { showModal && <MovieForm {...{showModal, handleShow, initialData}}/> }
                 </HeaderTop>
                 <SearchBar/>
             </WrapBg>
