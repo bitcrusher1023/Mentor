@@ -1,16 +1,12 @@
 import React, {useState} from 'react';
-import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Logo from '../components/Logo';
 import SearchBar from './SearchBar';
 import AddMovie from '../components/AddMovie';
-import AddMovieModal from './AddMovieModal';
 import MovieForm from './MovieForm';
-import { addMovie } from '../store/actions/moviesActions';
 
 const Header = () => {
     const [showModal, setShow] = useState(false);
-    const dispatch = useDispatch();
 
     const handleShow = () => {
         setShow(!showModal);

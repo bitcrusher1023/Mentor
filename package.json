@@ -83,7 +83,8 @@
     "react-select": "^3.1.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "styled-components": "^5.1.1"
+    "styled-components": "^5.1.1",
+    "yup": "^0.29.3"
   },
   "jest": {
     "setupFiles": [

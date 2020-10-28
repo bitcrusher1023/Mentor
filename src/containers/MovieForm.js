@@ -2,11 +2,13 @@
 /* eslint-disable react/require-default-props */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-import React, {useState} from 'react';
+/* eslint-disable react/jsx-props-no-spreading */
+
+import React from 'react';
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
 import Select from 'react-select';
+import * as Yup from 'yup';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import CloseButton from '../components/CloseButton';
@@ -26,10 +28,20 @@ const MovieForm = ({handleShow, initialData }) => {
         { value: 'Comedy', label: 'Comedy' },
     ];
 
+    const customValidationSchema = Yup.object().shape({
+        title: Yup.string('Provide a Title').required('Title is Required'),
+        release_date: Yup.string('Provide a Release date').required('Release date is Required'),
+        poster_path: Yup.string('').url('Provide a Valid URL').required('URL is Required'),
+        overview: Yup.string('').min(10, 'Must be 10 characters or more').required('Overview is Required'),
+        runtime: Yup.string('Provide a Runtime').min(0, 'Must be 0 characters or more').required('Runtime is Required'),
+        genres: Yup.string('Choose a Genres').required('Genres is Required'),
+    });
+
     const dispatch = useDispatch();
 
     const formik = useFormik({
         initialValues: {...initialData },
+        validationSchema: customValidationSchema,
         onSubmit: values => {
             dispatch(addMovie(values));
             handleShow();
@@ -47,48 +59,53 @@ const MovieForm = ({handleShow, initialData }) => {
                     <Label htmlFor="title">Title</Label>
                     <Input
                         id="title"
-                        name="title"
                         type="text"
                         placeholder='Title here'
-                        onChange={formik.handleChange}
-                        value={formik.values.title}
+                        {...formik.getFieldProps('title')}
                     />
+                    {formik.touched.title && formik.errors.title ? (
+                        <ErrorMessage>{formik.errors.title}</ErrorMessage>
+                    ) : null}
                     <Label htmlFor="release_date">Release date</Label>
                     <Input
                         id="release_date"
-                        name="release_date"
                         type="date"
                         placeholder='Select Date'
-                        onChange={formik.handleChange}
-                        value={formik.values.release_date}
+                        {...formik.getFieldProps('release_date')}
                     />
-                    <Label htmlFor="poster_path">Release date</Label>
+                    {formik.touched.release_date && formik.errors.release_date ? (
+                        <ErrorMessage>{formik.errors.release_date}</ErrorMessage>
+                    ) : null}
+                    <Label htmlFor="poster_path">Movie url</Label>
                     <Input
                         id="poster_path"
-                        name="poster_path"
                         type="url"
                         placeholder='Movie url here'
-                        onChange={formik.handleChange}
-                        value={formik.values.poster_path}
+                        {...formik.getFieldProps('poster_path')}
                     />
+                    {formik.touched.poster_path && formik.errors.poster_path ? (
+                        <ErrorMessage>{formik.errors.poster_path}</ErrorMessage>
+                    ) : null}
                     <Label htmlFor="overview">Overview</Label>
                     <Input
                         id="overview"
-                        name="overview"
                         type="text"
                         placeholder='Overview here'
-                        onChange={formik.handleChange}
-                        value={formik.values.overview}
+                        {...formik.getFieldProps('overview')}
                     />
+                    {formik.touched.overview && formik.errors.overview ? (
+                        <ErrorMessage>{formik.errors.overview}</ErrorMessage>
+                    ) : null}
                     <Label htmlFor="runtime">Runtime</Label>
                     <Input
                         id="runtime"
-                        name="runtime"
                         type="number"
                         placeholder='Runtime here'
-                        onChange={formik.handleChange}
-                        value={formik.values.runtime}
+                        {...formik.getFieldProps('runtime')}
                     />
+                    {formik.touched.runtime && formik.errors.runtime ? (
+                        <ErrorMessage>{formik.errors.runtime}</ErrorMessage>
+                    ) : null}
                     {/* <Select
                         id="genres"
                         type="text"
@@ -101,18 +118,22 @@ const MovieForm = ({handleShow, initialData }) => {
                         options={options}
                         onBlur={formik.handleBlur}
                     /> */}
+                    <Label htmlFor="genres">Genre</Label>
                     <SelectField
+                        id="genres"
                         name="genres"
-                        mode="multiple"
                         multiple
-                        // options={options}
                         value={formik.values.genres}
                         onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
                     >
                         { options.map(opt => {
-                            return <option key={opt.value} value={opt.value} label={opt.label} />
+                            return <option key={opt.value} value={opt.value} label={opt.label} />;
                         })}
                     </SelectField>
+                    {formik.touched.genres && formik.errors.genres ? (
+                        <ErrorMessage>{formik.errors.genres}</ErrorMessage>
+                    ) : null}
                     <BtnWrap>
                         <ResetBtn type="reset" onClick={formik.handleReset}>
                             Reset
@@ -185,10 +206,42 @@ const Input = styled.input`
 `;
 
 const SelectField = styled.select`
-    option {
-        font-size: 20px;
-        padding: 4px 20px;
+    display: inline-block;
+    box-sizing: border-box;
+    height: 50px;
+    margin: 20px 0;
+    padding: 10px 20px;
+    border-color: #232323;
+    border: none;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #fff;
+    border-image: none;
+    outline: 0px;
+    appearance: none;
+    background: transparent;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(45deg, transparent 50%, #f65261 50%), linear-gradient(135deg, #f65261 57%, transparent 50%);
+    background-position: right 13px top 1em, right 10px top 1em;
+    background-size: 5px 5px, 5px 5px;
+    opacity: 0.8;
+    font-size: 18px;
+    background-color: #424242;
+
+    &:focus {
+        border: 1px dotted #f65261;
     }
+
+    option {
+        padding: 4px 20px;
+        color: #555;
+        font-size: 20px;
+    }
+`;
+
+const ErrorMessage = styled.div`
+    color: red;
+    margin: -10px 0 20px;
 `;
 
 const BtnWrap = styled.div`
