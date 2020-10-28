@@ -7,12 +7,11 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
-import Select from 'react-select';
 import * as Yup from 'yup';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import CloseButton from '../components/CloseButton';
-import { addMovie } from '../store/actions/moviesActions';
+import { addMovie, updateMovie } from '../store/actions/moviesActions';
 
 const MovieForm = ({handleShow, initialData }) => {
 
@@ -43,7 +42,11 @@ const MovieForm = ({handleShow, initialData }) => {
         initialValues: {...initialData },
         validationSchema: customValidationSchema,
         onSubmit: values => {
-            dispatch(addMovie(values));
+            if (initialData.id) {
+                dispatch(updateMovie(values));
+            } else {
+                dispatch(addMovie(values));
+            }
             handleShow();
         },
     });
@@ -106,18 +109,6 @@ const MovieForm = ({handleShow, initialData }) => {
                     {formik.touched.runtime && formik.errors.runtime ? (
                         <ErrorMessage>{formik.errors.runtime}</ErrorMessage>
                     ) : null}
-                    {/* <Select
-                        id="genres"
-                        type="text"
-                        name="genres"
-                        closeMenuOnSelect={false}
-                        isMulti
-                        value={formik.values.genres}
-                        // onChange={formik.handleChange}
-                        onChange={selectedOption => formik.setFieldValue("genres", selectedOption)}
-                        options={options}
-                        onBlur={formik.handleBlur}
-                    /> */}
                     <Label htmlFor="genres">Genre</Label>
                     <SelectField
                         id="genres"
