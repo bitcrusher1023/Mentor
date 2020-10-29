@@ -1,26 +1,24 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import getMovies from '../store/actions/moviesActions';
 import { setSearchValue } from '../store/actions/searchActions';
 
 const SearchBar = () => {
     const [value, setValue] = useState('');
     const dispatch = useDispatch();
 
-    const handleSearch = () => {
-        dispatch(getMovies({searchValue: value}));
+    const handleSearch = (e) => {
+        dispatch(setSearchValue(value));
     };
 
-    const handleSearchByEnter = (ev) => {
-        if (ev.key === 'Enter') {
-            dispatch(getMovies({searchValue: value}));
+    const handleSearchByEnter = (e) => {
+        if (e.which === 13) {
+            dispatch(setSearchValue(value));
         }
     };
 
     const handleSetValue = (ev) => {
         setValue(ev.target.value);
-        dispatch(setSearchValue(ev.target.value));
     };
 
     return (
@@ -42,7 +40,7 @@ const SearchBar = () => {
 const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
-    align-item: center;
+    align-items: center;
     width: 90%;
     margin: 0 auto;
 `;

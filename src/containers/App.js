@@ -1,64 +1,56 @@
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable no-param-reassign */
-import React, { PureComponent } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import Header from './Header';
-import MoviesResult from './MoviesResult';
+import MoviesContainer from './MoviesContainer';
 import Footer from '../components/Footer';
 import ErrorBoundary from './ErrorBounding';
-import getMoviesAction from '../store/actions/moviesActions';
-import { getAllMovies } from '../store/selectors';
 
-class App extends PureComponent {
+import MoviesFilter from './MoviesFilter';
+import MoviesSorting from './MoviesSorting'
 
-    componentDidMount() {
-        const { getMovies } = this.props;
-        getMovies();
-    }
-
-    render() {
-        const { moviesList } = this.props;
-
-        return (
-            <>
-                <Wrapper>
-                    <ErrorBoundary>
-                        <Header/>
-                    </ErrorBoundary>
-                    <ErrorBoundary>
-                        <MoviesResult
-                            movies = {moviesList}
-                        />
-                    </ErrorBoundary>
-                </Wrapper>
-                <Footer/>
-            </>
-        );
-    }
+const App = () => {
+    console.log('render')
+    return (
+        <>
+            <Wrapper>
+                <ErrorBoundary>
+                    <Header/>
+                </ErrorBoundary>
+                <ErrorBoundary>
+                    <MovieContainerWrapper>
+                    <ActionBar>
+                        <MoviesFilter />
+                        <MoviesSorting />
+                    </ActionBar>
+                        <MoviesContainer />
+                    </MovieContainerWrapper>
+                </ErrorBoundary>
+            </Wrapper>
+            <Footer/>
+        </>
+    );
 }
 
 const Wrapper = styled.div`
     background: #555;
 `;
 
-App.propTypes = {
-    moviesList: PropTypes.array.isRequired,
-    getMovies: PropTypes.func.isRequired
-};
+const MovieContainerWrapper = styled.section`
+    font-family: Helvetica, sans-serif;
+    background: #232323;
+    padding: 0 80px;
+`;
 
-const mapStateToProps = state => ({
-    moviesList: getAllMovies(state)
-});
+const ActionBar = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0;
+    padding: 3px 0;
+    border-bottom: 2px solid #555;
+    box-shadow: 0 5px 5px -5px rgba(0, 0, 0, .5);
+`;
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-    getMovies: getMoviesAction
-}, dispatch);
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(App);
-
+export default App;

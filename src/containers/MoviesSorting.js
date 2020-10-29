@@ -10,7 +10,6 @@ const MoviesSorting = () => {
     const sortingOnChange = (ev) => {
         dispatch(setSortingValue(ev.target.value));
         dispatch(sortMovies());
-
     };
 
     return (

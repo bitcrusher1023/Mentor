@@ -2,54 +2,51 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useCallback, useMemo } from 'react';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { setAllFilters, setFilters } from '../store/actions/filtersActions';
-import getMovies from '../store/actions/moviesActions';
+import { getFilters } from '../store/selectors';
+import { resetFilters, toggleFilter } from '../store/actions/filtersActions';
 
 const MoviesFilter = () => {
-    const filtersAll = useSelector(state => state.filters.allFilters);
-    const allChecked = useSelector(state => state.filters.allFiltersChecked);
-
-    const [allFilters, setFiltersData] = useState(filtersAll);
-
+    const filters = useSelector(getFilters, shallowEqual);
     const dispatch = useDispatch();
+    const allFiltersUnchecked = Object.values(filters).includes(true);
+console.log(filters)
+console.log('render-asdasd')
+    const handleResetFilters = useCallback(() => {
+        dispatch(resetFilters());
+    }, [dispatch]);
 
-    const onClickAll = () => {
-        dispatch(setAllFilters());
-        dispatch(getMovies());
-    };
-
-    const onClickFilter = (ev) => {
+    const handleToggleFilter = useCallback((ev) => {
         ev.preventDefault();
-        const { index } = ev.currentTarget.dataset;
-        dispatch(setFilters(index));
-        dispatch(getMovies());
-    };
+        dispatch(toggleFilter(ev.currentTarget.dataset.name.toLowerCase()))
+    }, [dispatch])
 
     return (
         <Form>
             <Ul>
-                <li onClick={onClickAll}>
+                <li onClick={handleResetFilters}>
                     <Input
                         id = "all"
                         type="checkbox"
-                        checked={allChecked}
+                        checked={!allFiltersUnchecked}
                         onChange={() => {}}
                     />
                     <Label htmlFor="all">All</Label>
                 </li>
-                {allFilters.map((filter, i) =>
-                    <li  key={filter.id} data-index={i} onClick={onClickFilter} >
-                        <Input 
-                            id={filter.name}
-                            type="checkbox"
-                            checked={filter.status}
-                            onChange={() => {}}
-                        />
-                        <Label htmlFor={filter.name}>{filter.name}</Label>
-                    </li>)}
+                {
+                    Object.keys(filters).map((key) =>
+                        <li  key={key} data-name={key} onClick={handleToggleFilter}>
+                            <Input 
+                                id={key}
+                                type="checkbox"
+                                checked={filters[key]}
+                                onChange={() => {}}
+                            />
+                            <Label htmlFor={key}>{key}</Label>
+                        </li>)
+                }
             </Ul>
         </Form>
     );
