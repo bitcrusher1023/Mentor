@@ -7,13 +7,15 @@ const SUCCESS_ADD_CODE = 201;
 const SUCCESS_UPDATE_CODE = 200;
 
 export const GET_MOVIES = 'GET_MOVIES';
-export const GET_MOVIES_REQUEST = 'GET_MOVIES_REQUEST';
 export const GET_MOVIES_REQUEST_START = 'GET_MOVIES_REQUEST_START';
 export const GET_MOVIES_REQUEST_SUCCESS = 'GET_MOVIES_REQUEST_SUCCESS';
 export const GET_MOVIES_REQUEST_ERROR = 'GET_MOVIES_REQUEST_ERROR';
 export const ADD_MOVIE = 'ADD_MOVIE';
 export const UPDATE_MOVIE = 'UPDATE_MOVIE';
-export const DELETE_MOVIE = 'DELETE_MOVIE';
+export const DELETE_MOVIE_REQUEST_START = 'DELETE_MOVIE_REQUEST_START';
+export const DELETE_MOVIE_REQUEST_SUCCESS = 'DELETE_MOVIE_REQUEST_SUCCESS';
+export const DELETE_MOVIE_REQUEST_ERROR = 'DELETE_MOVIE_REQUEST_ERROR';
+// export const DELETE_MOVIE = 'DELETE_MOVIE';
 
 export const requestMovies = options => async (dispatch) => {
     dispatch({
@@ -67,19 +69,26 @@ export const updateMovie = (movieData) => (dispatch, getState) => {
     });
 };
 
-export const deleteMovies = (movieId) => (dispatch, getState) => {
-    const url = `${API_GATEWAY}/${movieId}`;
-    const movies = getAllMovies(getState());
-    const newMovies = [...movies].filter(item => item.id !== movieId);
+export const deleteMovies = (movieId) => async (dispatch) => {
+    const request = `${API_GATEWAY}/${movieId}`;
 
-    const request = axios.delete(url);
+    dispatch({
+        type: DELETE_MOVIE_REQUEST_START,
+        payload: { loading: true }
+    });
+    try {
+        const {status} = await axios.delete(request);
 
-    request.then(response => {
-        if (response.status === SUCCESS_DELETE_CODE) {
+        if (status === SUCCESS_DELETE_CODE) {
             dispatch({
-                type: DELETE_MOVIE,
-                payload: newMovies
+                type: DELETE_MOVIE_REQUEST_SUCCESS,
+                payload: { movieId, loading: false },
             });
         }
-    });
+    } catch (error) {
+        dispatch({
+            type: DELETE_MOVIE_REQUEST_ERROR,
+            payload: { error, loading: false },
+        });
+    }
 };

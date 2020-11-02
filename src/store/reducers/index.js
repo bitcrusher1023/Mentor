@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { combineReducers } from 'redux';
-import { moviesReducer } from './allMovies';
+import { moviesReducer } from './moviesReducer';
 import { searchReducer } from './searchReducer';
 import { filtersReducer } from './filtersReducer';
 import { sortingReducer } from './sortingReducer';
