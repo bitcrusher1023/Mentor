@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import MovieActionButton from '../components/MovieActionButton';
 import ActionOptions from './ActionOptions';
 import DeleteMovie from '../components/DeleteMovie';
-import AddMovieModal from './AddMovieModal';
-import { deleteMovies, updateMovie } from '../store/actions/moviesActions';
+import { deleteMovies } from '../store/actions/moviesActions';
+import MovieForm from './MovieForm';
 
 const MovieAction = ({isHovered, movie}) => {
     const [showOptions, setShowOptions] = useState(false);
@@ -52,17 +52,12 @@ const MovieAction = ({isHovered, movie}) => {
         ...movie
     });
 
-    const onSubmit = (movieData) => {
-        dispatch(updateMovie(movieData));
-        handleShow();
-    };
-
     return (
         <>
             { isHovered && <MovieActionButton {...{handleShowOptions}}/> }
             { showOptions && <ActionOptions {...{handleEditMovie, handleDeleteMovie}}/>}
             { showDelete && <DeleteMovie {...{handleShowDelete, onDelete}}/>}
-            { showEdit && <AddMovieModal {...{handleShow, handleEditMovie, initialData, onSubmit}}/> }
+            { showEdit && <MovieForm {...{handleShow, initialData}}/> }
         </>
     );
 };

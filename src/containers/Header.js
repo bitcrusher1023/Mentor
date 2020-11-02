@@ -1,15 +1,12 @@
 import React, {useState} from 'react';
-import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Logo from '../components/Logo';
 import SearchBar from './SearchBar';
 import AddMovie from '../components/AddMovie';
-import AddMovieModal from './AddMovieModal';
-import { addMovie } from '../store/actions/moviesActions';
+import MovieForm from './MovieForm';
 
 const Header = () => {
     const [showModal, setShow] = useState(false);
-    const dispatch = useDispatch();
 
     const handleShow = () => {
         setShow(!showModal);
@@ -21,17 +18,8 @@ const Header = () => {
         poster_path: '',
         overview: '',
         runtime: 0,
-        genres: ['Comedy', 'Drama', 'Romance' ]
+        genres: []
     });
-
-    const onSubmit = (movieData) => {
-        movieData.runtime = Number(movieData.runtime);
-        const newMoveData = {
-            ...movieData,
-        };
-        dispatch(addMovie(newMoveData));
-        handleShow();
-    };
 
     return (
         <Wrapper>
@@ -39,7 +27,7 @@ const Header = () => {
                 <HeaderTop>
                     <Logo><span>Netflix</span>roulette</Logo>
                     <AddMovie {...{handleShow}}/>
-                    { showModal && <AddMovieModal {...{showModal, handleShow, initialData, onSubmit}}/> }
+                    { showModal && <MovieForm {...{showModal, handleShow, initialData}}/> }
                 </HeaderTop>
                 <SearchBar/>
             </WrapBg>
