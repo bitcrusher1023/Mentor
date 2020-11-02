@@ -1,7 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { RESET_FILTERS, TOGGLE_FILTER } from '../actions/filtersActions';
 
-
 const initialState = {
     filters: {
         action: false,
@@ -18,7 +17,7 @@ const initialState = {
 export function filtersReducer(state = initialState, action) {
     switch (action.type) {
     case RESET_FILTERS:
-        return {...state, filters: Object.keys(state.filters).reduce((acc, key) => ({ ...acc, [key]: false }), {}) }
+        return {...state, filters: Object.keys(state.filters).reduce((acc, key) => ({ ...acc, [key]: false }), {}) };
     case TOGGLE_FILTER:
         return {
             ...state,
@@ -26,7 +25,7 @@ export function filtersReducer(state = initialState, action) {
                 ...state.filters,
                 [action.payload.filter]: !state.filters[action.payload.filter],
             }
-        }
+        };
     default:
         return state;
     }

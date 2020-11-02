@@ -8,10 +8,10 @@ import Footer from '../components/Footer';
 import ErrorBoundary from './ErrorBounding';
 
 import MoviesFilter from './MoviesFilter';
-import MoviesSorting from './MoviesSorting'
+import MoviesSorting from './MoviesSorting';
 
 const App = () => {
-    console.log('render')
+    console.log('render');
     return (
         <>
             <Wrapper>
@@ -20,10 +20,10 @@ const App = () => {
                 </ErrorBoundary>
                 <ErrorBoundary>
                     <MovieContainerWrapper>
-                    <ActionBar>
-                        <MoviesFilter />
-                        <MoviesSorting />
-                    </ActionBar>
+                        <ActionBar>
+                            <MoviesFilter />
+                            <MoviesSorting />
+                        </ActionBar>
                         <MoviesContainer />
                     </MovieContainerWrapper>
                 </ErrorBoundary>
@@ -31,7 +31,7 @@ const App = () => {
             <Footer/>
         </>
     );
-}
+};
 
 const Wrapper = styled.div`
     background: #555;

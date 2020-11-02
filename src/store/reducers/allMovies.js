@@ -1,6 +1,4 @@
 /* eslint-disable import/prefer-default-export */
-
-import { act } from 'react-test-renderer';
 import { GET_MOVIES_REQUEST, ADD_MOVIE, UPDATE_MOVIE, DELETE_MOVIE, GET_MOVIES_REQUEST_SUCCESS } from '../actions/moviesActions';
 import { SORT_MOVIES } from '../actions/sortingActions';
 
@@ -13,7 +11,7 @@ export function moviesReducer(state = initialState, action) {
     case GET_MOVIES_REQUEST:
         return {...state, movies: action.payload };
     case GET_MOVIES_REQUEST_SUCCESS:
-        return {...state, movies: action.payload.movies }
+        return {...state, movies: action.payload.movies };
     case SORT_MOVIES:
         return {...state, movies: action.payload };
     case ADD_MOVIE:

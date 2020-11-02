@@ -1,5 +1,5 @@
 import axios from "axios";
-import { searchValueSelector, getFilters, sortValueSelector, getAllMovies } from '../selectors';
+import { getAllMovies } from '../selectors';
 
 const API_GATEWAY = `http://localhost:4000/movies`;
 const SUCCESS_DELETE_CODE = 204;
@@ -15,43 +15,25 @@ export const ADD_MOVIE = 'ADD_MOVIE';
 export const UPDATE_MOVIE = 'UPDATE_MOVIE';
 export const DELETE_MOVIE = 'DELETE_MOVIE';
 
-const getMovies = () => (dispatch, getState) => {
-    const params = {};
-    params.search = searchValueSelector(getState());
-    params.searchBy = 'title';
-    params.sortBy = sortValueSelector(getState());
-    params.filter = getFilters(getState());
-    console.log('params', params);
-
-    const request = axios.get(API_GATEWAY, {params});
-
-    request.then(response => {
-        dispatch({
-            type: GET_MOVIES_REQUEST,
-            payload: response.data.data
-        });
-    });
-};
-
 export const requestMovies = options => async (dispatch) => {
     dispatch({
         type: GET_MOVIES_REQUEST_START,
         payload: { loading: true }
-    })
+    });
     try {
         const { data } = await axios.get(API_GATEWAY, options);
 
         dispatch({
             type: GET_MOVIES_REQUEST_SUCCESS,
             payload: { movies: data.data, loading: false },
-        })
+        });
     } catch (error) {
         dispatch({
             type: GET_MOVIES_REQUEST_ERROR,
             payload: { error, loading: false },
-        })
+        });
     }
-}
+};
 
 export const addMovie = (movieData) => (dispatch, getState) => {
     const movies = getAllMovies(getState());
@@ -73,7 +55,7 @@ export const updateMovie = (movieData) => (dispatch, getState) => {
 
     request.then(response => {
         if (response.status === SUCCESS_UPDATE_CODE) {
-            const  index = movies.findIndex(x => x.id === response.data.id);
+            const index = movies.findIndex(x => x.id === response.data.id);
             movies.splice(index, 1, response.data);
             const newMovies = [...movies];
 
@@ -101,5 +83,3 @@ export const deleteMovies = (movieId) => (dispatch, getState) => {
         }
     });
 };
-
-export default getMovies;

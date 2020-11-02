@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { getFilters } from '../store/selectors';
@@ -12,16 +12,16 @@ const MoviesFilter = () => {
     const filters = useSelector(getFilters, shallowEqual);
     const dispatch = useDispatch();
     const allFiltersUnchecked = Object.values(filters).includes(true);
-console.log(filters)
-console.log('render-asdasd')
+    console.log(filters);
+    console.log('render-asdasd');
     const handleResetFilters = useCallback(() => {
         dispatch(resetFilters());
     }, [dispatch]);
 
     const handleToggleFilter = useCallback((ev) => {
         ev.preventDefault();
-        dispatch(toggleFilter(ev.currentTarget.dataset.name.toLowerCase()))
-    }, [dispatch])
+        dispatch(toggleFilter(ev.currentTarget.dataset.name.toLowerCase()));
+    }, [dispatch]);
 
     return (
         <Form>
