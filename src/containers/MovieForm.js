@@ -6,12 +6,13 @@
 
 import React from 'react';
 import { useFormik } from 'formik';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import CloseButton from '../components/CloseButton';
 import { addMovie, updateMovie } from '../store/actions/moviesActions';
+import { getAllMovies } from '../store/selectors';
 
 const MovieForm = ({handleShow, initialData }) => {
 
@@ -37,13 +38,21 @@ const MovieForm = ({handleShow, initialData }) => {
     });
 
     const dispatch = useDispatch();
+    const movies = useSelector(getAllMovies);
+
+    const moviesUpdate = (originalMovies, movieToUpdate) => {
+        const index = originalMovies.findIndex(movie => movie.id === movieToUpdate.id);
+        movies.splice(index, 1, movieToUpdate);
+        return [...originalMovies];
+    };
 
     const formik = useFormik({
         initialValues: {...initialData },
         validationSchema: customValidationSchema,
         onSubmit: values => {
             if (initialData.id) {
-                dispatch(updateMovie(values));
+                const updatedMovies = moviesUpdate(movies, values);
+                dispatch(updateMovie(values, updatedMovies));
             } else {
                 dispatch(addMovie(values));
             }
