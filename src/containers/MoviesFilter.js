@@ -5,16 +5,16 @@
 import React, { useCallback } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { getFilters } from '../store/selectors';
+import { getFilters, getActiveFilters } from '../store/selectors';
 import { resetFilters, toggleFilter } from '../store/actions/filtersActions';
 
 const MoviesFilter = () => {
     const filters = useSelector(getFilters, shallowEqual);
+    const allFiltersUnchecked = useSelector(getActiveFilters, shallowEqual);
     const dispatch = useDispatch();
-    const allFiltersUnchecked = Object.values(filters).includes(true);
-    console.log(filters);
-    console.log('render-asdasd');
-    const handleResetFilters = useCallback(() => {
+
+    const handleResetFilters = useCallback((e) => {
+        e.preventDefault()
         dispatch(resetFilters());
     }, [dispatch]);
 
@@ -30,7 +30,7 @@ const MoviesFilter = () => {
                     <Input
                         id = "all"
                         type="checkbox"
-                        checked={!allFiltersUnchecked}
+                        checked={allFiltersUnchecked.length === 0}
                         onChange={() => {}}
                     />
                     <Label htmlFor="all">All</Label>
