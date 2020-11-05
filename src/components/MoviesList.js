@@ -1,19 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import MovieCard from '../components/MovieCard';
+import MovieCard from './MovieCard';
 
-const MoviesList = (props) => {
-    const { movies } = props;
-    const moviesList = [...movies];
-    
+const MoviesList = ({ movies }) => {
     return (
         <>
             <MoviesCount>
-                <b>{moviesList.length}</b> movies found
+                <b>{movies.length}</b> movies found
             </MoviesCount>
             <Wrapper>
-                {moviesList.map((movie) => (
+                {movies.map((movie) => (
                     <MovieCard
                         movie = {movie}
                         key = {movie.id}
