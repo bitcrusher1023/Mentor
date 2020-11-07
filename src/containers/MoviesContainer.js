@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { requestMovies } from '../store/actions/moviesActions';
 import { getAllMovies, getParams } from '../store/selectors';
 import MoviesList from '../components/MoviesList';
-import NoFound from '../components/NoFound';
+import NotFound from '../components/NotFound';
 
 const MoviesContainer = () => {
     const dispatch = useDispatch();
@@ -16,7 +16,7 @@ const MoviesContainer = () => {
         dispatch(requestMovies({ params }));
     }, [dispatch, params]);
 
-    return movies.length > 0 ? <MoviesList movies={movies} /> : <NoFound />;
+    return movies.length > 0 ? <MoviesList movies={movies} /> : <NotFound />;
 };
 
 export default MoviesContainer;
