@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Footer from '../components/Footer';
 import ErrorBoundary from './ErrorBounding';
 import Page404 from '../pages/Page404';
-import HomePage from '../pages/HomePage';
+import SearchMoviesPage from '../pages/SearchMoviesPage';
 import MovieDetailsPage from '../pages/MovieDetailsPage';
 
 const App = () => {
@@ -12,7 +12,8 @@ const App = () => {
             <ErrorBoundary>
                 <Router>
                     <Switch>
-                        <Route exact path="/" component={HomePage} />
+                        <Route exact path="/" component={SearchMoviesPage} />
+                        <Route exact path="/search" component={SearchMoviesPage} />
                         <Route exact path="/movie/:id" component={MovieDetailsPage} />
                         <Route path="*" component={Page404} />
                         {/* <Route path="*" component={NotFound} /> */}

@@ -22,7 +22,6 @@ const MovieDetailsPage = () => {
                 <ActionBar />
                 <MoviesList movies={movies}/>
             </MovieContainerWrapper>
-            
         </Wrapper>
     );
 };

@@ -5,7 +5,7 @@ import Header from '../containers/Header';
 import ActionBar from '../components/ActionBar';
 import NotFound from '../components/NotFound';
 
-const HomePage = () => {
+const SearchMoviesPage = () => {
 
     return (
         <Wrapper>
@@ -29,4 +29,4 @@ const MovieContainerWrapper = styled.section`
     padding: 0 80px;
 `;
 
-export default HomePage;
+export default SearchMoviesPage;
