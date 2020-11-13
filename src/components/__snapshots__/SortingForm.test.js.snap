@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SortingForm component Render SortingForm snapshot 1`] = `
+<DocumentFragment>
+  <form
+    class="sc-AxjAm iEUOGh filter-menu"
+  >
+    <label
+      class="sc-AxirZ khLcSR"
+      for="seriesInput"
+    >
+      Sort By
+    </label>
+    <select
+      class="sc-AxiKw bczocQ"
+      id="seriesInput"
+    >
+      <option
+        value="release_date"
+      >
+        release date
+      </option>
+      <option
+        value="title"
+      >
+        movie name
+      </option>
+      <option
+        value="genres"
+      >
+        genre
+      </option>
+    </select>
+  </form>
+</DocumentFragment>
+`;

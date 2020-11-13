@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotFindURL component Render NotFindURL snapshot 1`] = `ShallowWrapper {}`;

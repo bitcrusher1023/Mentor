@@ -22,7 +22,11 @@ const ActionIcon = styled.div`
 `;
 
 MovieActionButton.propTypes = {
-    handleShowOptions: PropTypes.func.isRequired
+    handleShowOptions: PropTypes.func
+};
+
+MovieActionButton.defaultProps = {
+    handleShowOptions: () => {}
 };
 
 export default MovieActionButton;

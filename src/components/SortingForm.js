@@ -55,7 +55,11 @@ const Select = styled.select`
 `;
 
 SortingForm.propTypes = {
-    sortingOnChange: PropTypes.func.isRequired,
+    sortingOnChange: PropTypes.func
+};
+
+SortingForm.defaultProps = {
+    sortingOnChange: () => {}
 };
 
 export default SortingForm;

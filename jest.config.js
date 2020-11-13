@@ -1,9 +1,8 @@
 module.exports = {
     automock: false,
-    browser: false,
     bail: false,
     testRegex: "/*.test.js$",
-    collectCoverage: true,
+    // collectCoverage: true,
     collectCoverageFrom: [
         'src/**/*.{js,jsx}',
         '!**/node_modules/**',

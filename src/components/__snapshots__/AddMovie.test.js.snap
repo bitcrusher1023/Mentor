@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddMovie component Render AddMovie snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="sc-AxjAm lhlTFD"
+  >
+    + Add Movie
+  </button>
+</DocumentFragment>
+`;
+
+exports[`AddMovie component render AddMovie snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="sc-AxjAm lhlTFD"
+  >
+    + Add Movie
+  </button>
+</DocumentFragment>
+`;
