@@ -1,19 +1,27 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { setSearchValue } from '../store/actions/searchActions';
 
 const SearchBar = () => {
+    const history = useHistory();
+
     const [value, setValue] = useState('');
     const dispatch = useDispatch();
 
-    const handleSearch = (e) => {
-        dispatch(setSearchValue(value));
+    const handleSearch = () => {
+        history.push({
+            pathname: '/search',
+            search: `?search=${value}`,
+        });
+        // dispatch(setSearchValue(value));
     };
 
     const handleSearchByEnter = (e) => {
         if (e.which === 13) {
-            dispatch(setSearchValue(value));
+            history.replace(`/search?search=${value}`);
+            // dispatch(setSearchValue(value));
         }
     };
 

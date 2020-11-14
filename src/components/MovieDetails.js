@@ -1,23 +1,19 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable no-undef */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import Logo from '../components/Logo';
+import Logo from './Logo';
+import SearchBtn from './SearchBtn';
 
-const MovieDetails = ({ movieData, handleSearch }) => {
+const MovieDetails = ({ movieData }) => {
 
     return (
         <Wrapper>
             <RowHeader>
                 <Logo/>
-                <SearchWrap onClick={handleSearch}>
-                    <SearchBlock>
-                        <SearchCircle />
-                        <SearchRectangle />
-                    </SearchBlock>
-                </SearchWrap>
+                <Link to='/'>
+                    <SearchBtn />
+                </Link>
             </RowHeader>
             <Row>
                 <Poster image={movieData.poster_path} />
@@ -39,13 +35,9 @@ const MovieDetails = ({ movieData, handleSearch }) => {
 };
 
 const Wrapper = styled.section`
-    position: absolute; 
-    top: 0;
-    left: 0;
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 460px;
     box-sizing: border-box;
     padding: 30px;
     z-index: 5;
@@ -63,36 +55,6 @@ const RowHeader = styled.div`
 const Row = styled.div`
     display: flex;
     padding: 10px;
-`;
-
-const SearchWrap = styled.div`
-    position: relative;
-    width: 40px;
-    height: 30px;
-`;
-
-const SearchBlock = styled.div`
-    position: relative;
-    width: 20px;
-    margin: 0 auto;
-    padding: 10px 0;
-    text-align: center;
-`;
-
-const SearchCircle = styled.div`
-    width: 10px;
-    height: 10px;
-    border: 4px solid #f65261;
-    border-radius: 50%;
-`;
-
-const SearchRectangle = styled.div`
-    position: absolute;
-    right: 15px;
-    bottom: 10px;
-    width: 12px;
-    transform: rotate(140deg);
-    border: 1.5px solid #f65261;
 `;
 
 const Poster = styled.div`
@@ -159,7 +121,6 @@ const Overview = styled.p`
 MovieDetails.propTypes = {
     // eslint-disable-next-line react/forbid-prop-types
     movieData: PropTypes.object,
-    handleSearch: PropTypes.func.isRequired
 };
 
 MovieDetails.defaultProps = {

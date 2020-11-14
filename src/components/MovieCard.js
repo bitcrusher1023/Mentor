@@ -1,9 +1,8 @@
 /* eslint-disable react/forbid-prop-types */
-import React, {useState, useCallback} from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import MovieAction from '../containers/MovieAction';
-import MovieDetails from '../containers/MovieDetails';
 
 const MovieCard = (props) => {
     const { movie, title, genres, date, image } = props;
@@ -14,57 +13,29 @@ const MovieCard = (props) => {
         setHovered(!isHovered);
     };
 
-    const [showMovieDetails, setShowMovieDetails] = useState(false);
-
-    const handleShowMovieDetails = useCallback(() => {
-        setShowMovieDetails(!showMovieDetails);
-    }, [showMovieDetails]);
-
-    const [movieDetailsData, setMovieDetails] = useState(null);
-
-    const handleClick = useCallback(item => {
-        setMovieDetails(item);
-    }, [movie]);
-
-    const handleMovieDetails = () => {
-        handleClick(movie);
-        handleShowMovieDetails();
-    };
-
-    const handleSearch = () => {
-        handleShowMovieDetails();
-    };
-
     return (
-        <>
-            {showMovieDetails && <MovieDetails 
-                movieData = {movieDetailsData}
-                handleSearch = {handleSearch}
-            />}
-            <Wrapper 
-                onMouseEnter={handleHover}
-                onMouseLeave={handleHover}
-                onClick={handleMovieDetails}>
-                <Poster image={image}>
-                    <MovieAction 
-                        {...{isHovered}}
-                        movie = {movie}
-                    />
-                </Poster>
-                <MovieInfo>
-                    <MovieInfoCol>
-                        <Title>{title}</Title>
-                        <Genre>{genres.join(' ')}</Genre>
-                    </MovieInfoCol>
-                    <ReleaseDate>{date}</ReleaseDate>
-                </MovieInfo>
-            </Wrapper>
-        </>
+        <Wrapper 
+            onMouseEnter={handleHover}
+            onMouseLeave={handleHover}>
+            <Poster image={image}>
+                <MovieAction 
+                    {...{isHovered}}
+                    movie = {movie}
+                />
+            </Poster>
+            <MovieInfo>
+                <MovieInfoCol>
+                    <Title>{title}</Title>
+                    <Genre>{genres.join(' ')}</Genre>
+                </MovieInfoCol>
+                <ReleaseDate>{date}</ReleaseDate>
+            </MovieInfo>
+        </Wrapper>
     );
 };
 
 const Wrapper = styled.section`
-    width: 30%;
+    width: 100%;
     margin: 0 0 20px 0;
 `;
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const NoFound = () => {
+const NotFound = () => {
     return (
         <Content>No Movie Found</Content>
     );
@@ -15,4 +15,4 @@ const Content = styled.p`
     margin: 0;
 `;
 
-export default NoFound;
+export default NotFound;

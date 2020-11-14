@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_GATEWAY = `http://localhost:4000/movies`;
+export const API_GATEWAY = `http://localhost:4000/movies`;
 const SUCCESS_DELETE_CODE = 204;
 const SUCCESS_UPDATE_CODE = 200;
 
@@ -8,6 +8,9 @@ export const GET_MOVIES = 'GET_MOVIES';
 export const GET_MOVIES_REQUEST_START = 'GET_MOVIES_REQUEST_START';
 export const GET_MOVIES_REQUEST_SUCCESS = 'GET_MOVIES_REQUEST_SUCCESS';
 export const GET_MOVIES_REQUEST_ERROR = 'GET_MOVIES_REQUEST_ERROR';
+export const GET_MOVIE_REQUEST_START = 'GET_MOVIE_REQUEST_START';
+export const GET_MOVIE_REQUEST_SUCCESS = 'GET_MOVIE_REQUEST_SUCCESS';
+export const GET_MOVIE_REQUEST_ERROR = 'GET_MOVIE_REQUEST_ERROR';
 export const ADD_MOVIE_REQUEST_START = 'ADD_MOVIE_REQUEST_START';
 export const ADD_MOVIE_REQUEST_SUCCESS = 'ADD_MOVIE_REQUEST_SUCCESS';
 export const ADD_MOVIE_REQUEST_ERROR = 'ADD_MOVIE_REQUEST_ERROR';
@@ -18,12 +21,33 @@ export const DELETE_MOVIE_REQUEST_START = 'DELETE_MOVIE_REQUEST_START';
 export const DELETE_MOVIE_REQUEST_SUCCESS = 'DELETE_MOVIE_REQUEST_SUCCESS';
 export const DELETE_MOVIE_REQUEST_ERROR = 'DELETE_MOVIE_REQUEST_ERROR';
 
+export const fetchMovieById = id => async dispatch => {
+    dispatch({
+        type: GET_MOVIE_REQUEST_START,
+        payload: { loading: true }
+    });
+
+    try {
+        const { data } = await axios.get(`${API_GATEWAY}/${id}`);
+        dispatch({
+            type: GET_MOVIE_REQUEST_SUCCESS,
+            payload: { movies: data.data, loading: false },
+        });
+    } catch(error) {
+        dispatch({
+            type: GET_MOVIE_REQUEST_ERROR,
+            payload: { error, loading: false },
+        });
+    }
+}
+
 export const requestMovies = options => async (dispatch) => {
     dispatch({
         type: GET_MOVIES_REQUEST_START,
         payload: { loading: true }
     });
     try {
+        console.log('requestMovies options !!!!!!!!!!!!!!!!!', options);
         const { data } = await axios.get(API_GATEWAY, options);
 
         dispatch({
