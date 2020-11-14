@@ -81,8 +81,13 @@ const ConfirmBtn = styled.button`
 `;
 
 DeleteMovie.propTypes = {
-    handleShowDelete: PropTypes.func.isRequired,
-    onDelete: PropTypes.func.isRequired
+    handleShowDelete: PropTypes.func,
+    onDelete: PropTypes.func
+};
+
+DeleteMovie.defaultProps = {
+    handleShowDelete: () => {},
+    onDelete: () => {}
 };
 
 export default DeleteMovie;

@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`filters_reducer INITIAL_STATE is correct 1`] = `
+Object {
+  "filters": Object {
+    "action": false,
+    "adventure": false,
+    "animation": false,
+    "comedy": false,
+    "drama": false,
+    "family": false,
+    "fantasy": false,
+    "romance": false,
+  },
+}
+`;
+
+exports[`filters_reducer RESET_FILTERS returns the correct state 1`] = `
+Object {
+  "filters": Object {
+    "action": false,
+    "adventure": false,
+    "animation": false,
+    "comedy": false,
+    "drama": false,
+    "family": false,
+    "fantasy": false,
+    "romance": false,
+  },
+}
+`;
+
+exports[`filters_reducer TOGGLE_FILTER returns the correct state 1`] = `
+Object {
+  "filters": Object {
+    "action": false,
+    "adventure": false,
+    "animation": false,
+    "comedy": false,
+    "drama": false,
+    "family": false,
+    "fantasy": false,
+    "romance": false,
+    "undefined": true,
+  },
+}
+`;

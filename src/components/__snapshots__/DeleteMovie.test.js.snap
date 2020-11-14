@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DeleteMovie component Render DeleteMovie snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <div
+      class="sc-AxirZ gDnNWd"
+    >
+      <p
+        class="sc-AxhCb ikwPvn"
+      >
+        Delete movie
+      </p>
+      <div>
+        <div
+          class="sc-AxjAm dmMcfw"
+        />
+      </div>
+      <p
+        class="sc-AxhUy jjxvwK"
+      >
+        Are you sure you want to delete this movie?
+      </p>
+      <div
+        class="sc-AxgMl gEcqvy"
+      >
+        <button
+          class="sc-AxheI gbRxar"
+        >
+          Confirm
+        </button>
+      </div>
+    </div>
+    <div
+      class="sc-AxiKw eCQiNm"
+    />
+  </div>
+</DocumentFragment>
+`;

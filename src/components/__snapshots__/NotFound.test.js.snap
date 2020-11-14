@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotFound component Render NotFound snapshot 1`] = `
+<DocumentFragment>
+  <p
+    class="sc-AxjAm dVuOJJ"
+  >
+    No Movie Found
+  </p>
+</DocumentFragment>
+`;

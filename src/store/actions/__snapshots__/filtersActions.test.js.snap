@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`filters_actions resetFilters Dispatches the correct action and payload 1`] = `
+Array [
+  Object {
+    "type": "RESET_FILTERS",
+  },
+]
+`;
+
+exports[`filters_actions toggleFilter Dispatches the correct action and payload 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "filter": "filterName",
+    },
+    "type": "TOGGLE_FILTER",
+  },
+]
+`;

@@ -8,9 +8,9 @@
     "build": "cross-env NODE_ENV=production webpack",
     "lint": "eslint ./src/**/**.js",
     "lint:fix": "eslint ./src/**/**.js --fix",
-    "test": "jest",
+    "test": "jest --config ./jest.config.js",
     "test:watch": "npm run test --watch",
-    "test:cover": "npm run test --coverage"
+    "test:cover": "npm run test --forceExit --detectOpenHandles --coverage --watchAll=false"
   },
   "repository": {
     "type": "git",
@@ -37,13 +37,15 @@
     "@babel/preset-react": "^7.10.4",
     "@babel/register": "^7.10.5",
     "@babel/runtime": "^7.11.0",
-    "@testing-library/jest-dom": "^5.11.2",
+    "@testing-library/jest-dom": "^5.11.5",
     "@testing-library/react": "^10.4.7",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.2.1",
     "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^3.0.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.5",
     "eslint": "^7.5.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-prettier": "^6.11.0",
@@ -58,6 +60,7 @@
     "html-webpack-plugin": "^4.3.0",
     "img-loader": "^3.0.1",
     "jest": "^26.2.2",
+    "jest-enzyme": "^7.1.2",
     "node-sass": "^4.14.1",
     "postcss-loader": "^3.0.0",
     "prettier": "^2.0.5",
@@ -84,18 +87,11 @@
     "react-router-dom": "^5.2.0",
     "react-select": "^3.1.0",
     "redux": "^4.0.5",
+    "redux-mock-store": "^1.5.4",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
     "styled-components": "^5.1.1",
     "swr": "^0.3.8",
     "yup": "^0.29.3"
-  },
-  "jest": {
-    "setupFiles": [
-      "<rootDir>/config/tests/jest.config"
-    ],
-    "transform": {
-      "^.+\\.js$": "babel-jest"
-    }
   }
 }
