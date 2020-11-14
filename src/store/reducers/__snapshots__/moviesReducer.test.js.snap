@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`filters_reducer ADD_MOVIE_REQUEST_SUCCESS returns the correct state 1`] = `
+Object {
+  "movies": Array [
+    undefined,
+  ],
+}
+`;
+
+exports[`filters_reducer DELETE_MOVIE_REQUEST_SUCCESS returns the correct state 1`] = `
+Object {
+  "movies": Array [],
+}
+`;
+
+exports[`filters_reducer GET_MOVIES_REQUEST_SUCCESS returns the correct state 1`] = `
+Object {
+  "movies": undefined,
+}
+`;
+
+exports[`filters_reducer INITIAL_STATE is correct 1`] = `
+Object {
+  "movies": Array [],
+}
+`;
+
+exports[`filters_reducer SORT_MOVIES returns the correct state 1`] = `
+Object {
+  "movies": Array [
+    Object {
+      "id": 1,
+      "title": "Aaaa",
+    },
+    Object {
+      "id": 2,
+      "title": "Bbbb",
+    },
+  ],
+}
+`;
+
+exports[`filters_reducer UPDATE_MOVIE_REQUEST_SUCCESS returns the correct state 1`] = `
+Object {
+  "movies": undefined,
+}
+`;

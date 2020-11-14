@@ -24,7 +24,6 @@ export const requestMovies = options => async (dispatch) => {
         payload: { loading: true }
     });
     try {
-        console.log('requestMovies options !!!!!!!!!!!!!!!!!', options);
         const { data } = await axios.get(API_GATEWAY, options);
 
         dispatch({

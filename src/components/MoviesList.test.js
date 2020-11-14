@@ -5,11 +5,6 @@ import { MemoryRouter, Link } from 'react-router-dom';
 import MoviesList from './MoviesList';
 
 describe('MoviesList component', () => {
-    // it('Render MoviesList snapshot', () => {
-    //     const { asFragment } = render(<MoviesList />);
-    //     expect(asFragment(<MoviesList />)).toMatchSnapshot();
-    // });
-
     const defaultMovies = [];
     const moviesDataMock = [
         {

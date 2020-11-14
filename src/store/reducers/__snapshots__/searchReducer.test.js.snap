@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`search_reducer SET_SEARCH_VALUE returns the correct state 1`] = `
+Object {
+  "searchBy": "title",
+  "searchValue": "MockSearchValue",
+}
+`;
